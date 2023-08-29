@@ -16,7 +16,7 @@ export const Container = styled.div`
     border: none;
     padding: 10px 30px;
     height: 100%;
-    font-size: 24px;
+    font-size: 40px;
     font-weight: 700;
     border-radius: 4px;
     color: #fff;
@@ -35,7 +35,7 @@ export const Container = styled.div`
     border: none;
     padding: 10px 30px;
     height: 100%;
-    font-size: 24px;
+    font-size: 40px;
     font-weight: 700;
     border-radius: 4px;
     color: #fff;
