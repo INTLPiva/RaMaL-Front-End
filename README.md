@@ -3,7 +3,6 @@
 - [RaMaL](#ramaL)
   - [⚡️ O Projeto](#️-o-projeto)
   - [🧑‍💻 Integrantes](#-integrantes)
-  - [🛠️ Backend](#️-backend)
   - [🖥️ Tecnologias Usadas](#️-tecnologias-usadas)
   - [⚙️ Instale antes de tentar executar o projeto)](#️-instale-antes-de-tentar-executar-o-projeto)
   - [🚀️ Executando os projetos](#️-executando-os-projetos)
@@ -18,14 +17,9 @@ Aplicação Web desenvolvido em React para leitura de livros em pdf usando coman
 - [Mariana Bassi](https://github.com/MaMBassi)
 - [Raphael Freitas](https://github.com/RaphaelRFreitas)
 
-## 🛠️ Backend
-
--
-
 ## 🖥️ Tecnologias Usadas
 
 - [ReactJS](https://reactjs.org/)
-- [Python](https://www.python.org/)
 
 ## ⚙️ Instale antes de tentar executar o projeto
 
@@ -50,7 +44,3 @@ yarn
 ```bash
 yarn start
 ```
-
-4. Rode o backend seguindo as instruções do repositório
-
--
