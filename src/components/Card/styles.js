@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 80%;
+  height: 78%;
   width: 30%;
   background-color: ${({ color }) => color};
   border-radius: 18px;
