@@ -23,7 +23,12 @@ export const Login = () => {
           </div>
 
           <div className="buttons">
-            <button className="entrar-button">Entrar</button>
+            <button
+              className="entrar-button"
+              onClick={() => navigate('../menu')}
+            >
+              Entrar
+            </button>
             <button className="voltar-button" onClick={() => navigate('/')}>
               Voltar
             </button>
