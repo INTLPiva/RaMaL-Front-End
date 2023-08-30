@@ -10,7 +10,7 @@ import SpeechRecognition, {
 import './styles.css';
 import microPhoneIcon from '../../assets/microphone.png';
 
-export const Leitura = ({ pdfUrl = '/src/assets/o_pequeno_principe.pdf' }) => {
+export const Leitura = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
   const { transcript, resetTranscript } = useSpeechRecognition();
   const [isListening, setIsListening] = useState(false);
   const microphoneRef = useRef(null);
