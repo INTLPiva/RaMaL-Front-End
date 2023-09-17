@@ -8,15 +8,16 @@ export const Container = styled.div`
   align-items: center;
 
   .title {
-    font-size: 80px;
+    font-size: 5rem;
     color: #000;
   }
 
   .orange-button {
+    position: relative;
     border: none;
-    padding: 10px 30px;
+    padding: 0.6rem 2rem;
     height: 100%;
-    font-size: 40px;
+    font-size: 3rem;
     font-weight: 700;
     border-radius: 4px;
     color: #fff;
@@ -24,23 +25,23 @@ export const Container = styled.div`
   }
 
   .orange-button:hover {
-    background-color: rgba(150, 80, 20, 1);
+    background-color: rgb(150, 80, 20);
   }
 
   .orange-button:active {
-    background-color: rgba(100, 50, 10, 1);
+    background-color: rgb(100, 50, 10);
   }
 
   .blue-button {
+    position: relative;
     border: none;
-    padding: 10px 30px;
+    padding: 0.6rem 2rem;
     height: 100%;
-    font-size: 40px;
+    font-size: 3rem;
     font-weight: 700;
     border-radius: 4px;
     color: #fff;
     background-color: rgb(51, 173, 255);
-    min-width: 250px;
   }
 
   .blue-button:hover {
@@ -56,6 +57,14 @@ export const Container = styled.div`
     flex-direction: column;
     width: 90%;
     height: 50%;
-    gap: 18px;
+    gap: 1rem;
+
+    span {
+      padding: 0.5rem 1rem;
+      font-size: 1.5rem;
+      top: -16px;
+      left: -16px;
+      width: 3rem;
+    }
   }
 `;
