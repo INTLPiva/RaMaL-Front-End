@@ -11,6 +11,12 @@ import { HelpButton } from '../../components/HelpButton';
 export const Menu = () => {
   const navigate = useNavigate();
 
+  const optionList = [
+    'C - para abrir chat',
+    '1 - para ler último livro',
+    '2 - para abrir biblioteca',
+  ];
+
   return (
     <>
       <Container>
@@ -49,7 +55,7 @@ export const Menu = () => {
         </Card>
       </Container>
 
-      <HelpButton />
+      <HelpButton list={optionList} />
       <ChatButton />
     </>
   );
