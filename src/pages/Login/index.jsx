@@ -16,26 +16,28 @@ export const Login = () => {
     <>
       <Container>
         <Card color={'rgb(224, 237, 246)'}>
-          <h1 className="title">Login</h1>
+          <>
+            <h1 className="title">Login</h1>
 
-          <div className="inputs">
-            <Input name="Email" type="text" />
-            <Input name="Senha" type="password" />
-          </div>
+            <div className="inputs">
+              <Input name="Email" type="text" />
+              <Input name="Senha" type="password" />
+            </div>
 
-          <div className="buttons">
-            <button
-              className="entrar-button"
-              onClick={() => navigate('../menu')}
-            >
-              Entrar
-              {/* <Badge text="1" /> */}
-            </button>
-            <button className="voltar-button" onClick={() => navigate('/')}>
-              Voltar
-              {/* <Badge text="2" /> */}
-            </button>
-          </div>
+            <div className="buttons">
+              <button
+                className="entrar-button"
+                onClick={() => navigate('../menu')}
+              >
+                Entrar
+                {/* <Badge text="1" /> */}
+              </button>
+              <button className="voltar-button" onClick={() => navigate('/')}>
+                Voltar
+                {/* <Badge text="2" /> */}
+              </button>
+            </div>
+          </>
         </Card>
       </Container>
 
