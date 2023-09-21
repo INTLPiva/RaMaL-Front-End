@@ -14,6 +14,7 @@ export const Container = styled.div`
     border-radius: 4px;
     background-color: rgb(245, 230, 100);
     width: 8.2rem;
+    height: 3.5rem;
   }
 
   .button:hover {

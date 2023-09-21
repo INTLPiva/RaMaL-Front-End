@@ -14,7 +14,11 @@ export function Modal({ setIsOpen, list }) {
           <div className="modalHeader">
             <h5 className="heading">Comandos de voz</h5>
           </div>
-          <button className="closeBtn" onClick={() => setIsOpen(false)}>
+          <button
+            id="closeModal"
+            className="closeBtn"
+            onClick={() => setIsOpen(false)}
+          >
             <X />
           </button>
           <div className="modalContent">

@@ -11,7 +11,11 @@ export const HelpButton = ({ list }) => {
 
   return (
     <Container>
-      <button className="button" onClick={() => setIsOpenModal(true)}>
+      <button
+        id="helpButton"
+        className="button"
+        onClick={() => setIsOpenModal(true)}
+      >
         Ajuda <Badge text="A" />
       </button>
 

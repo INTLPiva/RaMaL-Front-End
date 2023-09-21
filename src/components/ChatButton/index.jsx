@@ -6,7 +6,7 @@ import { Badge } from '../Badge';
 export const ChatButton = () => {
   return (
     <Container>
-      <button className="button">
+      <button id="chatButton" className="button">
         Chat <Badge text="C" />
       </button>
     </Container>

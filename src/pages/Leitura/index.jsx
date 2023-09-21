@@ -17,7 +17,7 @@ export const Leitura = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return (
-      <div className="mircophone-container">
+      <div className="microphone-container">
         Browser is not Support Speech Recognition.
       </div>
     );
@@ -86,6 +86,23 @@ export const Leitura = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
     }
   }, [transcript]);
 
+  // Funcao para iniciar a escuta quando abrir a página
+  useEffect(() => {
+    resetTranscript();
+    handleListening();
+  }, []);
+
+  useEffect(() => {
+    // Inicializa o intervalo de 10 segundos
+    const intervalo = setInterval(() => {
+      resetTranscript();
+      setOptions('');
+    }, 10000); // 10000 milissegundos = 10 segundos
+
+    // Limpa o intervalo quando o componente é desmontado
+    return () => clearInterval(intervalo);
+  }, []);
+
   const [text, setText] = useState(['']);
   const [numPages, setNumPages] = useState(1000);
   const [currentPage, setCurrentPage] = useState(0);
@@ -132,11 +149,6 @@ export const Leitura = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
     setCurrentPage(currentPage - 1);
   };
 
-  // Funcao para iniciar a escuta quando abrir a página
-  // useEffect(() => {
-  //   handleListening();
-  // }, []);
-
   // Verifica se a string é vazia e passa página
   useEffect(() => {
     if (text[currentPage].trim() === '') incrementCount();
@@ -145,7 +157,7 @@ export const Leitura = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
   return (
     <>
       <div className="microphone-wrapper">
-        <div className="mircophone-container">
+        <div className="microphone-container">
           <div
             className="microphone-icon-container"
             ref={microphoneRef}

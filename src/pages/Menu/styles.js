@@ -7,6 +7,17 @@ export const Container = styled.div`
   justify-content: space-evenly;
   align-items: center;
 
+  .microphone-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 5rem;
+    color: #000;
+    width: 100%;
+    height: 20vh;
+  }
+
   .title {
     font-size: 5rem;
     color: #000;
@@ -66,5 +77,22 @@ export const Container = styled.div`
       left: -16px;
       width: 3rem;
     }
+  }
+`;
+
+export const TranscriptContainer = styled.div`
+  position: fixed;
+  bottom: 20px;
+  width: 70%;
+  height: 3.5rem;
+  padding: 0 0.5rem;
+  border-radius: 4px;
+  background: rgb(255, 245, 240);
+  display: flex;
+  align-items: center;
+
+  p {
+    color: #000;
+    font-size: 1.5rem;
   }
 `;
