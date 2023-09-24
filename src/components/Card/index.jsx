@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
-export const Card = ({ children, color }) => {
+export const Card = ({ children, color = '#F0FFF0' }) => {
   return <Container color={color}>{children}</Container>;
 };
 

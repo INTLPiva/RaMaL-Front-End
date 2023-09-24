@@ -15,7 +15,7 @@ export const Cadastro = () => {
   return (
     <>
       <Container>
-        <Card color={'rgb(250, 235, 220)'}>
+        <Card color={'#FFFFCC'}>
           <>
             <h1 className="title">Cadastro</h1>
 

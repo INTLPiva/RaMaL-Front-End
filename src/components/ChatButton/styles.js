@@ -12,16 +12,16 @@ export const Container = styled.div`
     font-size: 1.5rem;
     font-weight: 700;
     border-radius: 4px;
-    background-color: rgb(124, 245, 100);
+    background-color: #3399ff;
     width: 8.2rem;
     height: 3.5rem;
   }
 
   .button:hover {
-    background-color: rgb(80, 160, 50);
+    background-color: #1c6de5;
   }
 
   .button:active {
-    background-color: rgb(60, 120, 40);
+    background-color: #1051b3;
   }
 `;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   height: 100vh;
-  background-color: rgb(230, 154, 78);
+  background-color: #ffff99;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,16 +20,16 @@ export const Container = styled.div`
     font-weight: 700;
     border-radius: 4px;
     color: #fff;
-    background-color: rgb(29, 76, 219);
+    background-color: #ffd700;
     min-width: 18rem;
   }
 
   .cadastrar-button:hover {
-    background-color: rgb(20, 50, 150);
+    background-color: #cca800;
   }
 
   .cadastrar-button:active {
-    background-color: rgb(10, 25, 75);
+    background-color: #b28d00;
   }
 
   .voltar-button {
@@ -40,16 +40,16 @@ export const Container = styled.div`
     font-weight: 700;
     border-radius: 4px;
     color: #fff;
-    background-color: rgb(219, 127, 29);
+    background-color: #f5e664;
     min-width: 18rem;
   }
 
   .voltar-button:hover {
-    background-color: rgb(150, 80, 20);
+    background-color: #e0d23d;
   }
 
   .voltar-button:active {
-    background-color: rgb(100, 50, 10);
+    background-color: #ccc20c;
   }
 
   .buttons {

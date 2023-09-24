@@ -15,7 +15,7 @@ export const Login = () => {
   return (
     <>
       <Container>
-        <Card color={'rgb(224, 237, 246)'}>
+        <Card>
           <>
             <h1 className="title">Login</h1>
 

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   height: 100vh;
-  background-color: rgb(255, 204, 179);
+  background-color: #90ee90;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -23,7 +23,7 @@ export const Container = styled.div`
     color: #000;
   }
 
-  .orange-button {
+  .menu-button {
     position: relative;
     border: none;
     padding: 0.6rem 2rem;
@@ -32,35 +32,15 @@ export const Container = styled.div`
     font-weight: 700;
     border-radius: 4px;
     color: #fff;
-    background-color: rgb(219, 127, 29);
+    background-color: #2e8b57;
   }
 
-  .orange-button:hover {
-    background-color: rgb(150, 80, 20);
+  .menu-button:hover {
+    background-color: #1f6140;
   }
 
-  .orange-button:active {
-    background-color: rgb(100, 50, 10);
-  }
-
-  .blue-button {
-    position: relative;
-    border: none;
-    padding: 0.6rem 2rem;
-    height: 100%;
-    font-size: 3rem;
-    font-weight: 700;
-    border-radius: 4px;
-    color: #fff;
-    background-color: rgb(51, 173, 255);
-  }
-
-  .blue-button:hover {
-    background-color: rgb(25, 87, 128);
-  }
-
-  .blue-button:active {
-    background-color: rgb(12, 43, 64);
+  .menu-button:active {
+    background-color: #15432d;
   }
 
   .buttons {
@@ -87,7 +67,7 @@ export const TranscriptContainer = styled.div`
   height: 3.5rem;
   padding: 0 0.5rem;
   border-radius: 4px;
-  background: rgb(255, 245, 240);
+  background: #f0fff0;
   display: flex;
   align-items: center;
 

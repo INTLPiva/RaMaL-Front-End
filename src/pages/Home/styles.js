@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   height: 100vh;
-  background-color: rgb(242, 239, 235);
+  background-color: #f0fff0;
   position: relative;
 
   .title {
@@ -25,16 +25,16 @@ export const Container = styled.div`
     font-weight: 700;
     border-radius: 4px;
     color: #fff;
-    background-color: rgb(29, 76, 219);
+    background-color: #2e8b57;
     min-width: 18rem;
   }
 
   .entrar-button:hover {
-    background-color: rgb(20, 50, 150);
+    background-color: #1f6140;
   }
 
   .entrar-button:active {
-    background-color: rgb(10, 25, 75);
+    background-color: #15432d;
   }
 
   .cadastrar-button {
@@ -48,15 +48,15 @@ export const Container = styled.div`
     font-weight: 700;
     border-radius: 4px;
     color: #fff;
-    background-color: rgb(219, 127, 29);
+    background-color: #ffd700;
     min-width: 18rem;
   }
 
   .cadastrar-button:hover {
-    background-color: rgb(150, 80, 20);
+    background-color: #cca800;
   }
 
   .cadastrar-button:active {
-    background-color: rgb(100, 50, 10);
+    background-color: #b28d00;
   }
 `;

@@ -57,20 +57,31 @@ export const Menu = () => {
   // };
 
   useEffect(() => {
-    if (transcript.includes('ramal')) {
+    if (transcript.includes('ramal') || transcript.includes('Ramal')) {
       //     setOptions(
       //       'Diga (Anterior) para voltar uma página ou (Próxima) para ir para próxima página'
       //     );
-      if (transcript.includes('um') || transcript.includes('1')) {
+      if (
+        transcript.includes('um') ||
+        transcript.includes('1') ||
+        transcript.includes('Um')
+      ) {
         resetTranscript();
         navigate('../leitura');
-      } else if (transcript.includes('dois') || transcript.includes('2')) {
+      } else if (
+        transcript.includes('dois') ||
+        transcript.includes('2') ||
+        transcript.includes('Dois')
+      ) {
         resetTranscript();
         // navigate('../biblioteca');
       } else if (hasLetterA(transcript)) {
         handleClickHelpButton();
         resetTranscript();
-      } else if (transcript.includes('fechar')) {
+      } else if (
+        transcript.includes('fechar') ||
+        transcript.includes('Fechar')
+      ) {
         handleClickCloseModal();
         resetTranscript();
       } else if (transcript.includes('c') || transcript.includes('C')) {
@@ -107,7 +118,7 @@ export const Menu = () => {
   return (
     <>
       <Container>
-        {/* <Card color={'rgb(255, 245, 240)'}>
+        {/* <Card>
           <h1 className="title">Upload</h1>
 
           <div className="buttons">
@@ -118,12 +129,12 @@ export const Menu = () => {
           </div>
         </Card> */}
 
-        <Card color={'rgb(255, 245, 240)'}>
+        <Card>
           <h1 className="title">Leitura</h1>
 
           <div className="buttons">
             <button
-              className="blue-button"
+              className="menu-button"
               onClick={() => navigate('../leitura')}
             >
               Ler <Badge text="1" />
@@ -131,11 +142,14 @@ export const Menu = () => {
           </div>
         </Card>
 
-        <Card color={'rgb(255, 245, 240)'}>
+        <Card>
           <h1 className="title">Biblioteca</h1>
 
           <div className="buttons">
-            <button className="orange-button">
+            <button
+              className="menu-button"
+              onClick={() => navigate('../biblioteca')}
+            >
               Entrar <Badge text="2" />
             </button>
           </div>
