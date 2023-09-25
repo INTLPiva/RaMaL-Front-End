@@ -146,21 +146,20 @@ export const Leitura = ({
       <Container>
         {currentPage < numPages ? (
           <>
-            <div className="textHeader">
-              <h2>Página atual: {currentPage + 1}</h2>
-
-              <div>
-                <button className="backPageButton" onClick={decrementCount}>
-                  Anterior <Badge text={'1'} />
-                </button>
-                <button className="nextPageButton" onClick={incrementCount}>
-                  Próxima <Badge text={'2'} />
-                </button>
-              </div>
-            </div>
-
             <div className="textContainer">
               <p>{text[currentPage]}</p>
+            </div>
+
+            <div className="textFooter">
+              <button className="backPageButton" onClick={decrementCount}>
+                Anterior <Badge text={'1'} />
+              </button>
+
+              <h2>Página atual: {currentPage + 1}</h2>
+
+              <button className="nextPageButton" onClick={incrementCount}>
+                Próxima <Badge text={'2'} />
+              </button>
             </div>
           </>
         ) : (

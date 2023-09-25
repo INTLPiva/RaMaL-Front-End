@@ -6,13 +6,31 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
 
-  .textHeader {
+  .textContainer {
+    position: fixed;
+    top: 5rem;
+    width: 70%;
+    height: 68%;
+    padding: 1rem;
+    border-radius: 4px;
+    background: #f0fff0;
     display: flex;
-    width: 100%;
-    /* height: 3.5rem; */
-    justify-content: space-around;
+    align-items: center;
+
+    overflow-y: auto;
+
+    p {
+      color: #000;
+      font-size: 1.4rem;
+    }
+  }
+
+  .textFooter {
+    display: flex;
+    text-align: center;
     align-items: end;
     margin-bottom: 5.5rem;
+    gap: 2rem;
 
     .backPageButton {
       position: relative;
@@ -21,7 +39,6 @@ export const Container = styled.div`
       font-size: 1.4rem;
       font-weight: 700;
       border-radius: 4px;
-      margin-right: 1rem;
       color: #fff;
       background-color: #3cb371;
     }
@@ -32,6 +49,10 @@ export const Container = styled.div`
 
     .backPageButton:active {
       background-color: #2a7454;
+    }
+
+    h2 {
+      margin-bottom: 0.6rem;
     }
 
     .nextPageButton {
@@ -51,25 +72,6 @@ export const Container = styled.div`
 
     .nextPageButton:active {
       background-color: #15432d;
-    }
-  }
-
-  .textContainer {
-    position: fixed;
-    top: 5rem;
-    width: 70%;
-    height: 68%;
-    padding: 1rem;
-    border-radius: 4px;
-    background: #f0fff0;
-    display: flex;
-    align-items: center;
-
-    overflow-y: auto;
-
-    p {
-      color: #000;
-      font-size: 1.4rem;
     }
   }
 `;
