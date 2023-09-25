@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 
+import { Modal } from './Modal';
 import { Container } from './styles';
 import { Badge } from '../Badge';
-import { Modal } from '../Modal';
 
 export const HelpButton = ({ list }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);

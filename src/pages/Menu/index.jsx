@@ -9,10 +9,12 @@ import { Container, TranscriptContainer } from './styles';
 import { Badge } from '../../components/Badge';
 import { Card } from '../../components/Card';
 import { ChatButton } from '../../components/ChatButton';
-import { handleClickChatButton } from '../../components/ChatButton/utils';
 import { HelpButton } from '../../components/HelpButton';
-import { handleClickHelpButton } from '../../components/HelpButton/utils';
-import { handleClickCloseModal } from '../../components/Modal/utils';
+import {
+  handleClickHelpButton,
+  handleClickCloseModal,
+  handleClickChatButton,
+} from '../../utils/handleClick';
 import { hasLetterA, hasLetterC } from '../../utils/hasLetter';
 
 export const Menu = () => {

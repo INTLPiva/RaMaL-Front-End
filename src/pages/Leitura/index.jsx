@@ -9,13 +9,15 @@ import SpeechRecognition, {
 
 import { Container, TranscriptContainer } from './styles';
 import { BackButton } from '../../components/BackButton';
-import { handleClickBackButton } from '../../components/BackButton/utils';
 import { Badge } from '../../components/Badge';
 import { ChatButton } from '../../components/ChatButton';
-import { handleClickChatButton } from '../../components/ChatButton/utils';
 import { HelpButton } from '../../components/HelpButton';
-import { handleClickHelpButton } from '../../components/HelpButton/utils';
-import { handleClickCloseModal } from '../../components/Modal/utils';
+import {
+  handleClickHelpButton,
+  handleClickCloseModal,
+  handleClickBackButton,
+  handleClickChatButton,
+} from '../../utils/handleClick';
 import { hasLetterA, hasLetterB, hasLetterC } from '../../utils/hasLetter';
 
 export const Leitura = ({
