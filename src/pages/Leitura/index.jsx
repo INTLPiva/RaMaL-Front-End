@@ -23,9 +23,10 @@ export const Leitura = ({
   // '/pdfs/o_curioso_caso_de_benjamin_button.pdf'
 }) => {
   const optionList = [
-    'C - para abrir chat',
-    '1 - para ler último livro',
-    '2 - para abrir biblioteca',
+    'B - para voltar para o Menu',
+    'C - para abrir o chat',
+    '1 - para voltar uma página',
+    '2 - para passar uma página',
   ];
 
   const { transcript, resetTranscript } = useSpeechRecognition();

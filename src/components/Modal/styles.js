@@ -20,7 +20,7 @@ export const Container = styled.div`
   }
 
   .modal {
-    width: 27rem;
+    width: 30rem;
 
     background: white;
     color: white;
