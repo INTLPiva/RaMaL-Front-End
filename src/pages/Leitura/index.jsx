@@ -7,12 +7,28 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
 
-import './styles.css';
-import microPhoneIcon from '../../assets/microphone.png';
+import { Container, TranscriptContainer } from './styles';
+import { BackButton } from '../../components/BackButton';
+import { handleClickBackButton } from '../../components/BackButton/utils';
+import { Badge } from '../../components/Badge';
+import { ChatButton } from '../../components/ChatButton';
+import { handleClickChatButton } from '../../components/ChatButton/utils';
+import { HelpButton } from '../../components/HelpButton';
+import { handleClickHelpButton } from '../../components/HelpButton/utils';
+import { handleClickCloseModal } from '../../components/Modal/utils';
+import { hasLetterA, hasLetterB, hasLetterC } from '../../utils/hasLetter';
 
-export const Leitura = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
+export const Leitura = ({
+  pdfUrl = '/pdfs/o_pequeno_principe.pdf',
+  // '/pdfs/o_curioso_caso_de_benjamin_button.pdf'
+}) => {
+  const optionList = [
+    'C - para abrir chat',
+    '1 - para ler último livro',
+    '2 - para abrir biblioteca',
+  ];
+
   const { transcript, resetTranscript } = useSpeechRecognition();
-  const [isListening, setIsListening] = useState(false);
   const microphoneRef = useRef(null);
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
@@ -24,82 +40,52 @@ export const Leitura = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
   }
 
   const handleListening = () => {
-    setIsListening(true);
-    microphoneRef.current.classList.add('listening');
+    microphoneRef.current?.classList.add('listening');
     SpeechRecognition.startListening({
       continuous: true,
     });
   };
 
-  const handleStopListening = () => {
-    setIsListening(false);
-    microphoneRef.current.classList.remove('listening');
-    SpeechRecognition.stopListening();
-  };
-
-  const handleReset = () => {
-    handleStopListening();
-    resetTranscript();
-    setOptions('');
-  };
-
-  const [options, setOptions] = useState('');
-
   useEffect(() => {
-    if (transcript.includes('livro')) {
-      setOptions(
-        'Diga (Anterior) para voltar uma página ou (Próxima) para ir para próxima página'
-      );
-
-      if (transcript.includes('anterior')) {
-        // console.log('adicionar lógica para voltar uma página');
-        decrementCount();
-        resetTranscript();
-      } else if (transcript.includes('próxima')) {
-        // console.log('adicionar lógica para passar uma página');
-        incrementCount();
-        resetTranscript();
-      }
-    } else if (transcript.includes('cuidador')) {
-      setOptions(
-        'Diga (Chamar) para chamar o seu cuidador ou (Banheiro) se deseja ir ao banheiro ou (Dormir) se deja dormir'
-      );
-
-      if (transcript.includes('chamar')) {
-        console.log(
-          'adicionar lógica para enviar uma mensagem ao cuidador chamando ele'
-        );
-        resetTranscript();
-      } else if (transcript.includes('banheiro')) {
-        console.log(
-          'adicionar lógica para enviar uma mensagem ao cuidador dizendo que o paciente deseja ir ao banheiro'
-        );
-        resetTranscript();
-      } else if (transcript.includes('dormir')) {
-        console.log(
-          'adicionar lógica para enviar uma mensagem ao cuidador dizendo que o paciente deseja dormir'
-        );
-        resetTranscript();
-      }
-    } else if (transcript === '') {
-      setOptions('');
+    if (
+      transcript.includes('um') ||
+      transcript.includes('1') ||
+      transcript.includes('Um')
+    ) {
+      decrementCount();
+      resetTranscript();
+    } else if (
+      transcript.includes('dois') ||
+      transcript.includes('2') ||
+      transcript.includes('Dois')
+    ) {
+      incrementCount();
+      resetTranscript();
+    } else if (hasLetterA(transcript)) {
+      handleClickHelpButton();
+      resetTranscript();
+    } else if (transcript.includes('fechar') || transcript.includes('Fechar')) {
+      handleClickCloseModal();
+      resetTranscript();
+    } else if (hasLetterB(transcript)) {
+      handleClickBackButton();
+      resetTranscript();
+    } else if (hasLetterC(transcript)) {
+      handleClickChatButton();
+      resetTranscript();
     }
   }, [transcript]);
 
-  // Funcao para iniciar a escuta quando abrir a página
   useEffect(() => {
     resetTranscript();
     handleListening();
   }, []);
 
   useEffect(() => {
-    // Inicializa o intervalo de 10 segundos
     const intervalo = setInterval(() => {
       resetTranscript();
-      setOptions('');
-    }, 10000); // 10000 milissegundos = 10 segundos
+    }, 10000);
 
-    // Limpa o intervalo quando o componente é desmontado
     return () => clearInterval(intervalo);
   }, []);
 
@@ -132,7 +118,6 @@ export const Leitura = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
         return Promise.all(textPromises);
       })
       .then((pageTexts) => {
-        // `pageTexts` é um array contendo o texto de cada página do PDF
         setText(pageTexts);
         setNumPages(pageTexts.length);
       })
@@ -151,68 +136,59 @@ export const Leitura = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
 
   // Verifica se a string é vazia e passa página
   useEffect(() => {
-    if (text[currentPage].trim() === '') incrementCount();
+    if (text[currentPage]?.trim() === '') incrementCount();
   }, [text]);
 
   return (
     <>
-      <div className="microphone-wrapper">
-        <div className="microphone-container">
-          <div
-            className="microphone-icon-container"
-            ref={microphoneRef}
-            onClick={handleListening}
-          >
-            <img src={microPhoneIcon} className="microphone-icon" />
-          </div>
-          <div className="microphone-status">
-            {isListening ? 'Listening.........' : 'Click to start Listening'}
-          </div>
-          {isListening && (
-            <button className="microphone-stop btn" onClick={handleReset}>
-              Stop
-            </button>
-          )}
-        </div>
+      <BackButton page={'../menu'} />
 
-        {options ? (
-          <div className="options-container">
-            <h2>{options}</h2>
-          </div>
-        ) : (
-          <div className="options-container">
-            <h2>Diga livro</h2>
-          </div>
-        )}
+      <Container>
+        {currentPage < numPages ? (
+          <>
+            <div className="textHeader">
+              <h2>Página atual: {currentPage + 1}</h2>
 
-        {transcript && (
-          <div className="microphone-result-container">
-            <div className="microphone-result-text">{transcript}</div>
-            <button className="microphone-reset btn" onClick={handleReset}>
-              Reset
-            </button>
-          </div>
-        )}
-      </div>
-
-      {currentPage < numPages ? (
-        <>
-          <div className="text-header">
-            <h2>Página atual: {currentPage + 1}</h2>
-            <div>
-              <button className="microphone-reset btn" onClick={decrementCount}>
-                anterior
-              </button>
-              <button className="microphone-reset btn" onClick={incrementCount}>
-                próxima
-              </button>
+              <div>
+                <button className="backPageButton" onClick={decrementCount}>
+                  Anterior <Badge text={'1'} />
+                </button>
+                <button className="nextPageButton" onClick={incrementCount}>
+                  Próxima <Badge text={'2'} />
+                </button>
+              </div>
             </div>
-          </div>
-          <p className="text-container">{text[currentPage]}</p>
-        </>
-      ) : (
-        <h1 className="text-container">ACABOU</h1>
-      )}
+
+            <div className="textContainer">
+              <p>{text[currentPage]}</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="textHeader">
+              <h2>Página atual: {currentPage + 1}</h2>
+              <div>
+                <button className="orangeButton" onClick={decrementCount}>
+                  Anterior <Badge text={'1'} />
+                </button>
+                <button className="blueButton" onClick={incrementCount}>
+                  Próxima <Badge text={'2'} />
+                </button>
+              </div>
+            </div>
+            <div className="textContainer">
+              <h1>ACABOU</h1>
+            </div>
+          </>
+        )}
+
+        <TranscriptContainer>
+          <p>{transcript}</p>
+        </TranscriptContainer>
+      </Container>
+
+      <HelpButton list={optionList} />
+      <ChatButton />
     </>
   );
 };
