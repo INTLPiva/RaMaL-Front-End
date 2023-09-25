@@ -39,10 +39,3 @@ export const handleClickSecondChatOption = () => {
     secondChatOption.click();
   }
 };
-
-export const handleClickThirdChatOption = () => {
-  const thirdChatOption = document.getElementById('thirdChatOption');
-  if (thirdChatOption) {
-    thirdChatOption.click();
-  }
-};

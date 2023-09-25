@@ -16,7 +16,6 @@ import {
   handleClickChatButton,
   handleClickFirstChatOption,
   handleClickSecondChatOption,
-  handleClickThirdChatOption,
 } from '../../utils/handleClick';
 import {
   hasLetterA,
@@ -30,9 +29,9 @@ export const Menu = () => {
   const navigate = useNavigate();
 
   const optionList = [
-    'C - para abrir chat',
-    '1 - para ler último livro',
-    '2 - para abrir biblioteca',
+    'C - Para abrir chat',
+    '1 - Para ler último livro',
+    '2 - Para abrir biblioteca',
   ];
 
   const { transcript, resetTranscript } = useSpeechRecognition();
@@ -73,20 +72,17 @@ export const Menu = () => {
     } else if (hasLetterA(transcript)) {
       handleClickHelpButton();
       resetTranscript();
-    } else if (transcript.includes('fechar') || transcript.includes('Fechar')) {
-      handleClickCloseModal();
-      resetTranscript();
     } else if (hasLetterC(transcript) || transcript.includes('se')) {
       handleClickChatButton();
       resetTranscript();
     } else if (hasLetterD(transcript) || transcript.includes('de')) {
-      handleClickFirstChatOption();
+      handleClickCloseModal();
       resetTranscript();
     } else if (hasLetterE(transcript)) {
-      handleClickSecondChatOption();
+      handleClickFirstChatOption();
       resetTranscript();
     } else if (hasLetterF(transcript)) {
-      handleClickThirdChatOption();
+      handleClickSecondChatOption();
       resetTranscript();
     }
   }, [transcript]);

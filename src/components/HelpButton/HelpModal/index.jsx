@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { X } from 'phosphor-react';
 import PropTypes from 'prop-types';
 
 import { Container } from './styles';
@@ -14,15 +13,14 @@ export function HelpModal({ setIsOpen, list }) {
           <div className="modalHeader">
             <h5 className="heading">Comandos de voz</h5>
           </div>
-          <button
-            id="closeModal"
-            className="closeBtn"
-            onClick={() => setIsOpen(false)}
-          >
-            <X />
-          </button>
           <div className="modalContent">
             <ul>
+              <li>
+                <a id="closeModal" onClick={() => setIsOpen(false)}>
+                  D - Para fechar ajuda
+                </a>
+              </li>
+
               {list.map((value, number) => (
                 <li key={number}>{value}</li>
               ))}

@@ -1,7 +1,6 @@
 import React from 'react';
 
 // import axios from 'axios';
-import { X } from 'phosphor-react';
 import PropTypes from 'prop-types';
 
 import { Container } from './styles';
@@ -50,37 +49,27 @@ export function ChatModal({ setIsOpen }) {
           <div className="modalHeader">
             <h5 className="heading">Comandos do chat</h5>
           </div>
-          <button
-            id="closeModal"
-            className="closeBtn"
-            onClick={() => setIsOpen(false)}
-          >
-            <X />
-          </button>
           <div className="modalContent">
             <ul>
               <li>
-                <a
-                  id="firstChatOption"
-                  // onClick={() => sendMessage('Desejo ir ao banheiro')}
-                >
-                  D - Desejo ir ao banheiro
+                <a id="closeModal" onClick={() => setIsOpen(false)}>
+                  D - Para fechar chat
                 </a>
               </li>
               <li>
                 <a
-                  id="secondChatOption"
-                  // onClick={() => sendMessage('Desejo comer algo')}
+                  id="firstChatOption"
+                  // onClick={() => sendMessage('Desejo comer algo, por favor')}
                 >
                   E - Desejo comer algo
                 </a>
               </li>
               <li>
                 <a
-                  id="thirdChatOption"
-                  // onClick={() => sendMessage('Desejo que venha aqui')}
+                  id="secondChatOption"
+                  // onClick={() => sendMessage('Preciso que venha aqui, por favor')}
                 >
-                  F - Desejo que venha aqui
+                  F - Preciso que venha aqui
                 </a>
               </li>
             </ul>

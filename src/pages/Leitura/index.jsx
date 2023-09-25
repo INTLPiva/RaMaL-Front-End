@@ -19,7 +19,6 @@ import {
   handleClickChatButton,
   handleClickFirstChatOption,
   handleClickSecondChatOption,
-  handleClickThirdChatOption,
 } from '../../utils/handleClick';
 import {
   hasLetterA,
@@ -35,10 +34,10 @@ export const Leitura = ({
   // '/pdfs/o_curioso_caso_de_benjamin_button.pdf'
 }) => {
   const optionList = [
-    'B - para voltar para o Menu',
-    'C - para abrir o chat',
-    '1 - para voltar uma página',
-    '2 - para passar uma página',
+    'B - Para voltar para o Menu',
+    'C - Para abrir o chat',
+    '1 - Para voltar uma página',
+    '2 - Para passar uma página',
   ];
 
   const { transcript, resetTranscript } = useSpeechRecognition();
@@ -77,9 +76,6 @@ export const Leitura = ({
     } else if (hasLetterA(transcript)) {
       handleClickHelpButton();
       resetTranscript();
-    } else if (transcript.includes('fechar') || transcript.includes('Fechar')) {
-      handleClickCloseModal();
-      resetTranscript();
     } else if (hasLetterB(transcript)) {
       handleClickBackButton();
       resetTranscript();
@@ -87,13 +83,13 @@ export const Leitura = ({
       handleClickChatButton();
       resetTranscript();
     } else if (hasLetterD(transcript) || transcript.includes('de')) {
-      handleClickFirstChatOption();
+      handleClickCloseModal();
       resetTranscript();
     } else if (hasLetterE(transcript)) {
-      handleClickSecondChatOption();
+      handleClickFirstChatOption();
       resetTranscript();
     } else if (hasLetterF(transcript)) {
-      handleClickThirdChatOption();
+      handleClickSecondChatOption();
       resetTranscript();
     }
   }, [transcript]);

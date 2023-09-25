@@ -14,9 +14,10 @@ import { HelpButton } from '../../components/HelpButton';
 
 export const Biblioteca = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
   const optionList = [
-    'C - para abrir chat',
-    '1 - para ler último livro',
-    '2 - para abrir biblioteca',
+    'B - Para voltar para o Menu',
+    'C - Para abrir o chat',
+    '1 - Para ler último livro',
+    '2 - Para abrir biblioteca',
   ];
 
   const { transcript, resetTranscript } = useSpeechRecognition();
@@ -36,17 +37,6 @@ export const Biblioteca = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
       continuous: true,
     });
   };
-
-  // const handleStopListening = () => {
-  //   microphoneRef.current.classList.remove('listening');
-  //   SpeechRecognition.stopListening();
-  // };
-
-  // const handleReset = () => {
-  //   handleStopListening();
-  //   resetTranscript();
-  //   setOptions('');
-  // };
 
   useEffect(() => {
     if (transcript.includes('livro')) {
@@ -71,19 +61,16 @@ export const Biblioteca = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
     }
   }, [transcript]);
 
-  // Funcao para iniciar a escuta quando abrir a página
   useEffect(() => {
     resetTranscript();
     handleListening();
   }, []);
 
   useEffect(() => {
-    // Inicializa o intervalo de 10 segundos
     const intervalo = setInterval(() => {
       resetTranscript();
-    }, 10000); // 10000 milissegundos = 10 segundos
+    }, 10000);
 
-    // Limpa o intervalo quando o componente é desmontado
     return () => clearInterval(intervalo);
   }, []);
 
@@ -92,13 +79,6 @@ export const Biblioteca = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
       <BackButton page={'../menu'} />
 
       <Container>
-        {/* <div className="listHeader">
-          <span>Livros</span>
-          <a>
-            <Plus size={40} />
-          </a>
-        </div> */}
-
         <div className="listCard">
           <div className="listHeader">
             <span>Livros</span>
