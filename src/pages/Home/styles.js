@@ -7,11 +7,19 @@ export const Container = styled.div`
 
   .title {
     position: absolute;
-    top: 40%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 6rem;
     color: #000;
+  }
+
+  .ramal {
+    position: absolute;
+    width: 40rem;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
   }
 
   .entrar-button {
