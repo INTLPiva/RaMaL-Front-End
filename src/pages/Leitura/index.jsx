@@ -29,10 +29,7 @@ import {
   hasLetterF,
 } from '../../utils/hasLetter';
 
-export const Leitura = ({
-  pdfUrl = '/pdfs/o_pequeno_principe.pdf',
-  // '/pdfs/o_curioso_caso_de_benjamin_button.pdf'
-}) => {
+export const Leitura = ({ pdf }) => {
   const optionList = [
     'B - Para voltar para o Menu',
     'C - Para abrir o chat',
@@ -74,23 +71,23 @@ export const Leitura = ({
       incrementCount();
       resetTranscript();
     } else if (hasLetterA(transcript)) {
+      resetTranscript();
       handleClickHelpButton();
+    } else if (hasLetterB(transcript) || transcript.includes('bebê')) {
       resetTranscript();
-    } else if (hasLetterB(transcript)) {
       handleClickBackButton();
-      resetTranscript();
     } else if (hasLetterC(transcript) || transcript.includes('se')) {
+      resetTranscript();
       handleClickChatButton();
-      resetTranscript();
     } else if (hasLetterD(transcript) || transcript.includes('de')) {
+      resetTranscript();
       handleClickCloseModal();
-      resetTranscript();
     } else if (hasLetterE(transcript)) {
+      resetTranscript();
       handleClickFirstChatOption();
-      resetTranscript();
     } else if (hasLetterF(transcript)) {
-      handleClickSecondChatOption();
       resetTranscript();
+      handleClickSecondChatOption();
     }
   }, [transcript]);
 
@@ -102,7 +99,7 @@ export const Leitura = ({
   useEffect(() => {
     const intervalo = setInterval(() => {
       resetTranscript();
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(intervalo);
   }, []);
@@ -112,7 +109,7 @@ export const Leitura = ({
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
-    const loadingTask = pdfjs.getDocument(pdfUrl);
+    const loadingTask = pdfjs.getDocument(pdf);
 
     loadingTask.promise
       .then((pdfDocument) => {
@@ -142,7 +139,7 @@ export const Leitura = ({
       .catch((error) => {
         console.error('Erro ao carregar o PDF:', error);
       });
-  }, [pdfUrl]);
+  }, [pdf]);
 
   const incrementCount = () => {
     setCurrentPage(currentPage + 1);
@@ -211,5 +208,5 @@ export const Leitura = ({
 };
 
 Leitura.propTypes = {
-  pdfUrl: PropTypes.string,
+  pdf: PropTypes.string,
 };

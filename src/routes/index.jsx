@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -10,14 +10,16 @@ import { Login } from '../pages/Login';
 import { Menu } from '../pages/Menu';
 
 export function AppRoutes() {
+  const [pdf, setPdf] = useState('/pdfs/o_pequeno_principe.pdf');
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/cadastro" element={<Cadastro />} />
       <Route path="/login" element={<Login />} />
       <Route path="/menu" element={<Menu />} />
-      <Route path="/leitura" element={<Leitura />} />
-      <Route path="/biblioteca" element={<Biblioteca />} />
+      <Route path="/leitura" element={<Leitura pdf={pdf} />} />
+      <Route path="/biblioteca" element={<Biblioteca setPdf={setPdf} />} />
     </Routes>
   );
 }

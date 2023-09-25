@@ -23,6 +23,8 @@ import {
   hasLetterD,
   hasLetterE,
   hasLetterF,
+  hasLetterG,
+  hasLetterH,
 } from '../../utils/hasLetter';
 
 export const Menu = () => {
@@ -55,35 +57,27 @@ export const Menu = () => {
   };
 
   useEffect(() => {
-    if (
-      transcript.includes('um') ||
-      transcript.includes('1') ||
-      transcript.includes('Um')
-    ) {
+    if (hasLetterA(transcript)) {
+      resetTranscript();
+      handleClickHelpButton();
+    } else if (hasLetterC(transcript) || transcript.includes('se')) {
+      resetTranscript();
+      handleClickChatButton();
+    } else if (hasLetterD(transcript) || transcript.includes('de')) {
+      resetTranscript();
+      handleClickCloseModal();
+    } else if (hasLetterE(transcript)) {
+      resetTranscript();
+      handleClickFirstChatOption();
+    } else if (hasLetterF(transcript)) {
+      resetTranscript();
+      handleClickSecondChatOption();
+    } else if (hasLetterG(transcript)) {
       resetTranscript();
       navigate('../leitura');
-    } else if (
-      transcript.includes('dois') ||
-      transcript.includes('2') ||
-      transcript.includes('Dois')
-    ) {
+    } else if (hasLetterH(transcript)) {
       resetTranscript();
       navigate('../biblioteca');
-    } else if (hasLetterA(transcript)) {
-      handleClickHelpButton();
-      resetTranscript();
-    } else if (hasLetterC(transcript) || transcript.includes('se')) {
-      handleClickChatButton();
-      resetTranscript();
-    } else if (hasLetterD(transcript) || transcript.includes('de')) {
-      handleClickCloseModal();
-      resetTranscript();
-    } else if (hasLetterE(transcript)) {
-      handleClickFirstChatOption();
-      resetTranscript();
-    } else if (hasLetterF(transcript)) {
-      handleClickSecondChatOption();
-      resetTranscript();
     }
   }, [transcript]);
 
@@ -95,7 +89,7 @@ export const Menu = () => {
   useEffect(() => {
     const intervalo = setInterval(() => {
       resetTranscript();
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(intervalo);
   }, []);
@@ -111,7 +105,7 @@ export const Menu = () => {
               className="menu-button"
               onClick={() => navigate('../leitura')}
             >
-              Ler <Badge text="1" />
+              Ler <Badge text="G" />
             </button>
           </div>
         </Card>
@@ -124,7 +118,7 @@ export const Menu = () => {
               className="menu-button"
               onClick={() => navigate('../biblioteca')}
             >
-              Entrar <Badge text="2" />
+              Entrar <Badge text="H" />
             </button>
           </div>
         </Card>

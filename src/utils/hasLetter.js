@@ -27,3 +27,13 @@ export const hasLetterF = (string) => {
   const regex = /\bf\b/i;
   return regex.test(string);
 };
+
+export const hasLetterG = (string) => {
+  const regex = /\bg\b/i;
+  return regex.test(string);
+};
+
+export const hasLetterH = (string) => {
+  const regex = /\bh\b/i;
+  return regex.test(string);
+};

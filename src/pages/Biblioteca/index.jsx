@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 
 import { PlusCircle, Trash, ArrowRight } from 'phosphor-react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
@@ -11,13 +12,30 @@ import { Container, TranscriptContainer } from './styles';
 import { BackButton } from '../../components/BackButton';
 import { ChatButton } from '../../components/ChatButton';
 import { HelpButton } from '../../components/HelpButton';
+import {
+  handleClickHelpButton,
+  handleClickCloseModal,
+  handleClickBackButton,
+  handleClickChatButton,
+  handleClickFirstChatOption,
+  handleClickSecondChatOption,
+} from '../../utils/handleClick';
+import {
+  hasLetterA,
+  hasLetterB,
+  hasLetterC,
+  hasLetterD,
+  hasLetterE,
+  hasLetterF,
+} from '../../utils/hasLetter';
 
-export const Biblioteca = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
+export const Biblioteca = ({ setPdf }) => {
+  const navigate = useNavigate();
+
   const optionList = [
     'B - Para voltar para o Menu',
     'C - Para abrir o chat',
-    '1 - Para ler último livro',
-    '2 - Para abrir biblioteca',
+    'N.º - Para escolher um livro',
   ];
 
   const { transcript, resetTranscript } = useSpeechRecognition();
@@ -39,25 +57,40 @@ export const Biblioteca = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
   };
 
   useEffect(() => {
-    if (transcript.includes('livro')) {
-      if (transcript.includes('cuidador')) {
-        if (transcript.includes('chamar')) {
-          console.log(
-            'adicionar lógica para enviar uma mensagem ao cuidador chamando ele'
-          );
-          resetTranscript();
-        } else if (transcript.includes('banheiro')) {
-          console.log(
-            'adicionar lógica para enviar uma mensagem ao cuidador dizendo que o paciente deseja ir ao banheiro'
-          );
-          resetTranscript();
-        } else if (transcript.includes('dormir')) {
-          console.log(
-            'adicionar lógica para enviar uma mensagem ao cuidador dizendo que o paciente deseja dormir'
-          );
-          resetTranscript();
-        }
-      }
+    if (hasLetterA(transcript)) {
+      resetTranscript();
+      handleClickHelpButton();
+    } else if (hasLetterB(transcript) || transcript.includes('bebê')) {
+      resetTranscript();
+      handleClickBackButton();
+    } else if (hasLetterC(transcript) || transcript.includes('se')) {
+      resetTranscript();
+      handleClickChatButton();
+    } else if (hasLetterD(transcript) || transcript.includes('de')) {
+      resetTranscript();
+      handleClickCloseModal();
+    } else if (hasLetterE(transcript)) {
+      resetTranscript();
+      handleClickFirstChatOption();
+    } else if (hasLetterF(transcript)) {
+      resetTranscript();
+      handleClickSecondChatOption();
+    } else if (
+      transcript.includes('um') ||
+      transcript.includes('1') ||
+      transcript.includes('Um')
+    ) {
+      resetTranscript();
+      setPdf('/pdfs/o_pequeno_principe.pdf');
+      navigate('../leitura');
+    } else if (
+      transcript.includes('dois') ||
+      transcript.includes('2') ||
+      transcript.includes('Dois')
+    ) {
+      resetTranscript();
+      setPdf('/pdfs/o_curioso_caso_de_benjamin_button.pdf');
+      navigate('../leitura');
     }
   }, [transcript]);
 
@@ -69,7 +102,7 @@ export const Biblioteca = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
   useEffect(() => {
     const intervalo = setInterval(() => {
       resetTranscript();
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(intervalo);
   }, []);
@@ -88,23 +121,33 @@ export const Biblioteca = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
           </div>
 
           <div className="listItems">
-            <span>O Pequeno Príncipe</span>
+            <span>1 - O Pequeno Príncipe</span>
             <div>
               <a>
                 <Trash size={32} />
               </a>
-              <a>
+              <a
+                onClick={() => {
+                  setPdf('/pdfs/o_pequeno_principe.pdf');
+                  navigate('../leitura');
+                }}
+              >
                 <ArrowRight size={32} />
               </a>
             </div>
           </div>
           <div className="listItems">
-            <span>O Curioso Caso de Benjamin Button</span>
+            <span>2 - O Curioso Caso de Benjamin Button</span>
             <div>
               <a>
                 <Trash size={32} />
               </a>
-              <a>
+              <a
+                onClick={() => {
+                  setPdf('/pdfs/o_curioso_caso_de_benjamin_button.pdf');
+                  navigate('../leitura');
+                }}
+              >
                 <ArrowRight size={32} />
               </a>
             </div>
@@ -123,5 +166,5 @@ export const Biblioteca = ({ pdfUrl = '/pdfs/o_pequeno_principe.pdf' }) => {
 };
 
 Biblioteca.propTypes = {
-  pdfUrl: PropTypes.string,
+  setPdf: PropTypes.func,
 };
