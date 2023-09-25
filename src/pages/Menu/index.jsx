@@ -10,6 +10,7 @@ import { Badge } from '../../components/Badge';
 import { Card } from '../../components/Card';
 import { ChatButton } from '../../components/ChatButton';
 import { HelpButton } from '../../components/HelpButton';
+import { PerfilButton } from '../../components/PerfilButton';
 import {
   handleClickHelpButton,
   handleClickCloseModal,
@@ -96,6 +97,8 @@ export const Menu = () => {
 
   return (
     <>
+      <PerfilButton />
+
       <Container>
         <Card>
           <h1 className="title">Leitura</h1>
