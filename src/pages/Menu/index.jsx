@@ -14,8 +14,17 @@ import {
   handleClickHelpButton,
   handleClickCloseModal,
   handleClickChatButton,
+  handleClickFirstChatOption,
+  handleClickSecondChatOption,
+  handleClickThirdChatOption,
 } from '../../utils/handleClick';
-import { hasLetterA, hasLetterC } from '../../utils/hasLetter';
+import {
+  hasLetterA,
+  hasLetterC,
+  hasLetterD,
+  hasLetterE,
+  hasLetterF,
+} from '../../utils/hasLetter';
 
 export const Menu = () => {
   const navigate = useNavigate();
@@ -67,8 +76,17 @@ export const Menu = () => {
     } else if (transcript.includes('fechar') || transcript.includes('Fechar')) {
       handleClickCloseModal();
       resetTranscript();
-    } else if (hasLetterC(transcript)) {
+    } else if (hasLetterC(transcript) || transcript.includes('se')) {
       handleClickChatButton();
+      resetTranscript();
+    } else if (hasLetterD(transcript) || transcript.includes('de')) {
+      handleClickFirstChatOption();
+      resetTranscript();
+    } else if (hasLetterE(transcript)) {
+      handleClickSecondChatOption();
+      resetTranscript();
+    } else if (hasLetterF(transcript)) {
+      handleClickThirdChatOption();
       resetTranscript();
     }
   }, [transcript]);

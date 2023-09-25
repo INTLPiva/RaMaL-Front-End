@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
-export function Modal({ setIsOpen, list }) {
+export function HelpModal({ setIsOpen, list }) {
   return (
     <Container>
       <div className="darkBG" onClick={() => setIsOpen(false)} />
@@ -34,7 +34,7 @@ export function Modal({ setIsOpen, list }) {
   );
 }
 
-Modal.propTypes = {
+HelpModal.propTypes = {
   setIsOpen: PropTypes.func,
   list: PropTypes.array,
 };

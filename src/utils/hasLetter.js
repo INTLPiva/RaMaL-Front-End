@@ -12,3 +12,18 @@ export const hasLetterC = (string) => {
   const regex = /\bc\b/i;
   return regex.test(string);
 };
+
+export const hasLetterD = (string) => {
+  const regex = /\bd\b/i;
+  return regex.test(string);
+};
+
+export const hasLetterE = (string) => {
+  const regex = /\be\b/i;
+  return regex.test(string);
+};
+
+export const hasLetterF = (string) => {
+  const regex = /\bf\b/i;
+  return regex.test(string);
+};

@@ -17,8 +17,18 @@ import {
   handleClickCloseModal,
   handleClickBackButton,
   handleClickChatButton,
+  handleClickFirstChatOption,
+  handleClickSecondChatOption,
+  handleClickThirdChatOption,
 } from '../../utils/handleClick';
-import { hasLetterA, hasLetterB, hasLetterC } from '../../utils/hasLetter';
+import {
+  hasLetterA,
+  hasLetterB,
+  hasLetterC,
+  hasLetterD,
+  hasLetterE,
+  hasLetterF,
+} from '../../utils/hasLetter';
 
 export const Leitura = ({
   pdfUrl = '/pdfs/o_pequeno_principe.pdf',
@@ -73,8 +83,17 @@ export const Leitura = ({
     } else if (hasLetterB(transcript)) {
       handleClickBackButton();
       resetTranscript();
-    } else if (hasLetterC(transcript)) {
+    } else if (hasLetterC(transcript) || transcript.includes('se')) {
       handleClickChatButton();
+      resetTranscript();
+    } else if (hasLetterD(transcript) || transcript.includes('de')) {
+      handleClickFirstChatOption();
+      resetTranscript();
+    } else if (hasLetterE(transcript)) {
+      handleClickSecondChatOption();
+      resetTranscript();
+    } else if (hasLetterF(transcript)) {
+      handleClickThirdChatOption();
       resetTranscript();
     }
   }, [transcript]);

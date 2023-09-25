@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { Modal } from './Modal';
+import { HelpModal } from './HelpModal';
 import { Container } from './styles';
 import { Badge } from '../Badge';
 
@@ -19,7 +19,7 @@ export const HelpButton = ({ list }) => {
         Ajuda <Badge text="A" />
       </button>
 
-      {isOpenModal && <Modal setIsOpen={setIsOpenModal} list={list} />}
+      {isOpenModal && <HelpModal setIsOpen={setIsOpenModal} list={list} />}
     </Container>
   );
 };

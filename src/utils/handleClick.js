@@ -25,3 +25,24 @@ export const handleClickChatButton = () => {
     chatButton.click();
   }
 };
+
+export const handleClickFirstChatOption = () => {
+  const firstChatOption = document.getElementById('firstChatOption');
+  if (firstChatOption) {
+    firstChatOption.click();
+  }
+};
+
+export const handleClickSecondChatOption = () => {
+  const secondChatOption = document.getElementById('secondChatOption');
+  if (secondChatOption) {
+    secondChatOption.click();
+  }
+};
+
+export const handleClickThirdChatOption = () => {
+  const thirdChatOption = document.getElementById('thirdChatOption');
+  if (thirdChatOption) {
+    thirdChatOption.click();
+  }
+};
