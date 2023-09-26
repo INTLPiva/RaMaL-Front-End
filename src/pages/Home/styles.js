@@ -47,7 +47,7 @@ export const Container = styled.div`
 
   .cadastrar-button {
     position: absolute;
-    bottom: 5%;
+    bottom: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
     border: none;
