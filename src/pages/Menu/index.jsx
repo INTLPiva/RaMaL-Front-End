@@ -24,9 +24,9 @@ import {
   hasLetterC,
   hasLetterD,
   hasLetterE,
-  hasLetterF,
   hasLetterG,
   hasLetterH,
+  hasLetterO,
 } from '../../utils/hasLetter';
 
 export const Menu = () => {
@@ -71,7 +71,7 @@ export const Menu = () => {
     } else if (hasLetterE(transcript)) {
       resetTranscript();
       handleClickFirstChatOption();
-    } else if (hasLetterF(transcript)) {
+    } else if (hasLetterO(transcript) || transcript.includes('ó')) {
       resetTranscript();
       handleClickSecondChatOption();
     } else if (hasLetterG(transcript)) {

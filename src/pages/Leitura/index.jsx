@@ -27,7 +27,7 @@ import {
   hasLetterC,
   hasLetterD,
   hasLetterE,
-  hasLetterF,
+  hasLetterO,
 } from '../../utils/hasLetter';
 
 export const Leitura = ({ pdf }) => {
@@ -86,7 +86,7 @@ export const Leitura = ({ pdf }) => {
     } else if (hasLetterE(transcript)) {
       resetTranscript();
       handleClickFirstChatOption();
-    } else if (hasLetterF(transcript)) {
+    } else if (hasLetterO(transcript) || transcript.includes('ó')) {
       resetTranscript();
       handleClickSecondChatOption();
     }
