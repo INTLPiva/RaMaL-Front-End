@@ -104,6 +104,14 @@ export const Menu = () => {
         <Card>
           <h1 className="title">Leitura</h1>
 
+          <div className="description">
+            <h3>
+              Escolha uma local para apoiar seu dispositivo e Boa Leitura!
+            </h3>
+            <br />
+            <p>Observação: será carregado o último documento selecionado.</p>
+          </div>
+
           <div className="buttons">
             <button
               className="menu-button"
@@ -116,6 +124,15 @@ export const Menu = () => {
 
         <Card>
           <h1 className="title">Biblioteca</h1>
+
+          <div className="description">
+            <h3>
+              Verifique todos os títulos incluídos na Biblioteca Virtual e/ou
+              adicione novos.
+              <br />
+              Selecione o documento que deseja ler.
+            </h3>
+          </div>
 
           <div className="buttons">
             <button

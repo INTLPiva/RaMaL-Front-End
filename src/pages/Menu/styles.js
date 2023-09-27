@@ -23,6 +23,10 @@ export const Container = styled.div`
     color: #000;
   }
 
+  .description {
+    text-align: center;
+  }
+
   .menu-button {
     position: relative;
     border: none;
