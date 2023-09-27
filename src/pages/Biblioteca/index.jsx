@@ -8,10 +8,11 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
 
-import { Container, TranscriptContainer } from './styles';
+import { Container } from './styles';
 import { BackButton } from '../../components/BackButton';
 import { ChatButton } from '../../components/ChatButton';
 import { HelpButton } from '../../components/HelpButton';
+import { TranscriptContainer } from '../../components/TranscriptContainer';
 import {
   handleClickHelpButton,
   handleClickCloseModal,
@@ -154,9 +155,7 @@ export const Biblioteca = ({ setPdf }) => {
           </div>
         </div>
 
-        <TranscriptContainer>
-          <p>{transcript}</p>
-        </TranscriptContainer>
+        <TranscriptContainer transcript={transcript} />
       </Container>
 
       <HelpButton list={optionList} />

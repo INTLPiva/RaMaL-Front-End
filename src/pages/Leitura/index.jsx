@@ -7,11 +7,12 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
 
-import { Container, TranscriptContainer } from './styles';
+import { Container } from './styles';
 import { BackButton } from '../../components/BackButton';
 import { Badge } from '../../components/Badge';
 import { ChatButton } from '../../components/ChatButton';
 import { HelpButton } from '../../components/HelpButton';
+import { TranscriptContainer } from '../../components/TranscriptContainer';
 import {
   handleClickHelpButton,
   handleClickCloseModal,
@@ -149,7 +150,6 @@ export const Leitura = ({ pdf }) => {
     setCurrentPage(currentPage - 1);
   };
 
-  // Verifica se a string é vazia e passa página
   useEffect(() => {
     if (text[currentPage]?.trim() === '') incrementCount();
   }, [text]);
@@ -196,9 +196,7 @@ export const Leitura = ({ pdf }) => {
           </>
         )}
 
-        <TranscriptContainer>
-          <p>{transcript}</p>
-        </TranscriptContainer>
+        <TranscriptContainer transcript={transcript} />
       </Container>
 
       <HelpButton list={optionList} />

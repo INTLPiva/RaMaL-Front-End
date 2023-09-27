@@ -29,7 +29,10 @@ export const Container = styled.div`
     display: flex;
     text-align: center;
     align-items: end;
-    margin-bottom: 5.5rem;
+    margin-bottom: 6%;
+    // 5.5rem pro notebook
+    // 9.5rem pro monitor
+    // 6% para os 2;
     gap: 2rem;
 
     .backPageButton {
@@ -73,22 +76,5 @@ export const Container = styled.div`
     .nextPageButton:active {
       background-color: #15432d;
     }
-  }
-`;
-
-export const TranscriptContainer = styled.div`
-  position: fixed;
-  bottom: 20px;
-  width: 70%;
-  height: 3.5rem;
-  padding: 0 0.5rem;
-  border-radius: 4px;
-  background: #f0fff0;
-  display: flex;
-  align-items: center;
-
-  p {
-    color: #000;
-    font-size: 1.5rem;
   }
 `;

@@ -59,20 +59,3 @@ export const Container = styled.div`
     }
   }
 `;
-
-export const TranscriptContainer = styled.div`
-  position: fixed;
-  bottom: 20px;
-  width: 70%;
-  height: 3.5rem;
-  padding: 0 0.5rem;
-  border-radius: 4px;
-  background: #f0fff0;
-  display: flex;
-  align-items: center;
-
-  p {
-    color: #000;
-    font-size: 1.5rem;
-  }
-`;
