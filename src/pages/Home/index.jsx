@@ -10,9 +10,14 @@ export const Home = () => {
   return (
     <>
       <Container>
+        <img className="ramal" src="/src/assets/ramal.png" alt="ramal" />
+
         <h1 className="title">RaMaL</h1>
 
-        <img className="ramal" src="/src/assets/ramal.png" alt="ramal" />
+        <p className="description">
+          O sistema com reconhecimento de voz que irá lhe auxiliar na leitura de
+          livros e na comunicação com o cuidador através do Telegram.
+        </p>
 
         <button className="entrar-button" onClick={() => navigate('login')}>
           Entrar

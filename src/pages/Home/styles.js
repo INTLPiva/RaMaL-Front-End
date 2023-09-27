@@ -22,6 +22,16 @@ export const Container = styled.div`
     transform: translate(-50%, -50%);
   }
 
+  .description {
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
   .entrar-button {
     position: absolute;
     bottom: 20%;
@@ -47,7 +57,7 @@ export const Container = styled.div`
 
   .cadastrar-button {
     position: absolute;
-    bottom: 10%;
+    bottom: 8%;
     left: 50%;
     transform: translate(-50%, -50%);
     border: none;
