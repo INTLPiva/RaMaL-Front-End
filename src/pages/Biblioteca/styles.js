@@ -58,4 +58,12 @@ export const Container = styled.div`
       margin-left: 1rem;
     }
   }
+
+  .textContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    height: 80%;
+  }
 `;

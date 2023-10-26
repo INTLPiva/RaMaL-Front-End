@@ -34,8 +34,8 @@ export const Menu = () => {
 
   const optionList = [
     'C - Para abrir chat',
-    '1 - Para ler último livro',
-    '2 - Para abrir biblioteca',
+    'G - Para ler último livro',
+    'H - Para abrir biblioteca',
   ];
 
   const { transcript, resetTranscript } = useSpeechRecognition();

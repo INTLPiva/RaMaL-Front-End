@@ -3,10 +3,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { Container } from './styles';
+import { useAuth } from '../../contexts/AuthContext';
 import { Badge } from '../Badge';
 
 export const PerfilButton = () => {
   const [isOpenPerfil, setIsOpenPerfil] = useState(false);
+
+  const { signOut } = useAuth();
 
   const handleClick = () => {
     if (isOpenPerfil) {
@@ -27,7 +30,7 @@ export const PerfilButton = () => {
           <ul>
             <li>Informações</li>
             <li>Cuidadores</li>
-            <li>Sair</li>
+            <li onClick={signOut}>Sair</li>
           </ul>
         </div>
       )}

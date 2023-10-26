@@ -1,7 +1,6 @@
 import 'regenerator-runtime/runtime';
 import React, { useState, useEffect, useRef } from 'react';
 
-import * as pdfjs from 'pdfjs-dist';
 import PropTypes from 'prop-types';
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -105,42 +104,8 @@ export const Leitura = ({ pdf }) => {
     return () => clearInterval(intervalo);
   }, []);
 
-  const [text, setText] = useState(['']);
   const [numPages, setNumPages] = useState(1000);
   const [currentPage, setCurrentPage] = useState(0);
-
-  useEffect(() => {
-    const loadingTask = pdfjs.getDocument(pdf);
-
-    loadingTask.promise
-      .then((pdfDocument) => {
-        const numPages = pdfDocument.numPages;
-        const textPromises = [];
-
-        for (let pageNum = 1; pageNum <= numPages; pageNum++) {
-          textPromises.push(
-            pdfDocument.getPage(pageNum).then((page) => {
-              return page.getTextContent().then((textContent) => {
-                let text = '';
-                textContent.items.forEach((item) => {
-                  text += item.str + ' ';
-                });
-                return text;
-              });
-            })
-          );
-        }
-
-        return Promise.all(textPromises);
-      })
-      .then((pageTexts) => {
-        setText(pageTexts);
-        setNumPages(pageTexts.length);
-      })
-      .catch((error) => {
-        console.error('Erro ao carregar o PDF:', error);
-      });
-  }, [pdf]);
 
   const incrementCount = () => {
     setCurrentPage(currentPage + 1);
@@ -151,8 +116,9 @@ export const Leitura = ({ pdf }) => {
   };
 
   useEffect(() => {
-    if (text[currentPage]?.trim() === '') incrementCount();
-  }, [text]);
+    setNumPages(pdf?.length);
+    if (pdf[currentPage]?.trim() === '') incrementCount();
+  }, [pdf]);
 
   return (
     <>
@@ -162,7 +128,7 @@ export const Leitura = ({ pdf }) => {
         {currentPage < numPages ? (
           <>
             <div className="textContainer">
-              <p>{text[currentPage]}</p>
+              <p>{pdf[currentPage]}</p>
             </div>
 
             <div className="textFooter">
@@ -206,5 +172,5 @@ export const Leitura = ({ pdf }) => {
 };
 
 Leitura.propTypes = {
-  pdf: PropTypes.string,
+  pdf: PropTypes.array,
 };
