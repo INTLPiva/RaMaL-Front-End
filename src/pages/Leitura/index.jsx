@@ -17,17 +17,18 @@ import {
   handleClickCloseModal,
   handleClickBackButton,
   handleClickChatButton,
-  handleClickFirstChatOption,
+  // handleClickFirstChatOption,
   handleClickSecondChatOption,
 } from '../../utils/handleClick';
 import {
   hasLetterA,
   hasLetterB,
   hasLetterC,
-  hasLetterD,
-  hasLetterE,
+  hasLetterF,
+  // hasLetterE,
   hasLetterO,
 } from '../../utils/hasLetter';
+import { hasNumber1, hasNumber2 } from '../../utils/hasNumber';
 
 export const Leitura = ({ pdf }) => {
   const optionList = !pdf.length
@@ -58,36 +59,30 @@ export const Leitura = ({ pdf }) => {
   };
 
   useEffect(() => {
-    if (
-      transcript.includes('um') ||
-      transcript.includes('1') ||
-      transcript.includes('Um')
-    ) {
+    if (hasNumber1(transcript)) {
       decrementCount();
       resetTranscript();
-    } else if (
-      transcript.includes('dois') ||
-      transcript.includes('2') ||
-      transcript.includes('Dois')
-    ) {
+    } else if (hasNumber2(transcript)) {
       incrementCount();
       resetTranscript();
     } else if (hasLetterA(transcript)) {
       resetTranscript();
       handleClickHelpButton();
-    } else if (hasLetterB(transcript) || transcript.includes('bebê')) {
+    } else if (hasLetterB(transcript)) {
       resetTranscript();
       handleClickBackButton();
-    } else if (hasLetterC(transcript) || transcript.includes('se')) {
+    } else if (hasLetterC(transcript)) {
       resetTranscript();
       handleClickChatButton();
-    } else if (hasLetterD(transcript) || transcript.includes('de')) {
+    } else if (hasLetterF(transcript)) {
       resetTranscript();
       handleClickCloseModal();
-    } else if (hasLetterE(transcript)) {
-      resetTranscript();
-      handleClickFirstChatOption();
-    } else if (hasLetterO(transcript) || transcript.includes('ó')) {
+    }
+    // else if (hasLetterE(transcript)) {
+    //   resetTranscript();
+    //   handleClickFirstChatOption();
+    // }
+    else if (hasLetterO(transcript)) {
       resetTranscript();
       handleClickSecondChatOption();
     }

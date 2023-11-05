@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 import { useAuth } from '../../contexts/AuthContext';
-import { Badge } from '../Badge';
 
 export const PerfilButton = () => {
   const [isOpenPerfil, setIsOpenPerfil] = useState(false);
@@ -24,7 +23,7 @@ export const PerfilButton = () => {
     <Container>
       <button id="perfilButton" className="button" onClick={handleClick}>
         {/* <Gear size={40} /> */}
-        Perfil <Badge text="B" />
+        Perfil
       </button>
 
       {isOpenPerfil && (

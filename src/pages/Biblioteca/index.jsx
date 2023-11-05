@@ -23,17 +23,25 @@ import {
   handleClickCloseModal,
   handleClickBackButton,
   handleClickChatButton,
-  handleClickFirstChatOption,
+  // handleClickFirstChatOption,
   handleClickSecondChatOption,
 } from '../../utils/handleClick';
 import {
   hasLetterA,
   hasLetterB,
   hasLetterC,
-  hasLetterD,
-  hasLetterE,
+  hasLetterF,
+  // hasLetterE,
   hasLetterO,
 } from '../../utils/hasLetter';
+import {
+  hasNumber1,
+  hasNumber2,
+  hasNumber3,
+  hasNumber4,
+  hasNumber5,
+  hasNumber6,
+} from '../../utils/hasNumber';
 
 export const Biblioteca = ({ setPdf }) => {
   const [isOpenChooseFileModal, setIsOpenChooseFileModal] = useState(false);
@@ -106,56 +114,40 @@ export const Biblioteca = ({ setPdf }) => {
     if (hasLetterA(transcript)) {
       resetTranscript();
       handleClickHelpButton();
-    } else if (hasLetterB(transcript) || transcript.includes('bebê')) {
+    } else if (hasLetterB(transcript)) {
       resetTranscript();
       handleClickBackButton();
-    } else if (hasLetterC(transcript) || transcript.includes('se')) {
+    } else if (hasLetterC(transcript)) {
       resetTranscript();
       handleClickChatButton();
-    } else if (hasLetterD(transcript) || transcript.includes('de')) {
+    } else if (hasLetterF(transcript)) {
       resetTranscript();
       handleClickCloseModal();
-    } else if (hasLetterE(transcript)) {
-      resetTranscript();
-      handleClickFirstChatOption();
-    } else if (hasLetterO(transcript) || transcript.includes('ó')) {
+    }
+    // else if (hasLetterE(transcript)) {
+    //   resetTranscript();
+    //   handleClickFirstChatOption();
+    // }
+    else if (hasLetterO(transcript)) {
       resetTranscript();
       handleClickSecondChatOption();
-    } else if (
-      transcript.includes('um') ||
-      transcript.includes('1') ||
-      transcript.includes('Um')
-    ) {
+    } else if (hasNumber1(transcript)) {
+      resetTranscript();
       handleGetPDF(books[0]?.id);
-    } else if (
-      transcript.includes('dois') ||
-      transcript.includes('2') ||
-      transcript.includes('Dois')
-    ) {
+    } else if (hasNumber2(transcript)) {
+      resetTranscript();
       handleGetPDF(books[1]?.id);
-    } else if (
-      transcript.includes('três') ||
-      transcript.includes('3') ||
-      transcript.includes('Três')
-    ) {
+    } else if (hasNumber3(transcript)) {
+      resetTranscript();
       handleGetPDF(books[2]?.id);
-    } else if (
-      transcript.includes('quatro') ||
-      transcript.includes('4') ||
-      transcript.includes('Quatro')
-    ) {
+    } else if (hasNumber4(transcript)) {
+      resetTranscript();
       handleGetPDF(books[3]?.id);
-    } else if (
-      transcript.includes('cinco') ||
-      transcript.includes('5') ||
-      transcript.includes('Cinco')
-    ) {
+    } else if (hasNumber5(transcript)) {
+      resetTranscript();
       handleGetPDF(books[4]?.id);
-    } else if (
-      transcript.includes('seis') ||
-      transcript.includes('6') ||
-      transcript.includes('Seis')
-    ) {
+    } else if (hasNumber6(transcript)) {
+      resetTranscript();
       handleGetPDF(books[5]?.id);
     }
   }, [transcript]);

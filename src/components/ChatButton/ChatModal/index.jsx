@@ -53,23 +53,23 @@ export function ChatModal({ setIsOpen }) {
             <ul>
               <li>
                 <a id="closeModal" onClick={() => setIsOpen(false)}>
-                  D - Para fechar chat
+                  F - Para fechar chat
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a
                   id="firstChatOption"
                   // onClick={() => sendMessage('Desejo comer algo, por favor')}
                 >
                   E - Desejo comer algo
                 </a>
-              </li>
+              </li> */}
               <li>
                 <a
                   id="secondChatOption"
                   // onClick={() => sendMessage('Preciso que venha aqui, por favor')}
                 >
-                  F - Preciso que venha aqui
+                  O - Preciso que venha aqui
                 </a>
               </li>
             </ul>

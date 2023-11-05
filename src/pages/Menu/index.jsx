@@ -16,14 +16,14 @@ import {
   handleClickHelpButton,
   handleClickCloseModal,
   handleClickChatButton,
-  handleClickFirstChatOption,
+  // handleClickFirstChatOption,
   handleClickSecondChatOption,
 } from '../../utils/handleClick';
 import {
   hasLetterA,
   hasLetterC,
-  hasLetterD,
-  hasLetterE,
+  hasLetterF,
+  // hasLetterE,
   hasLetterG,
   hasLetterH,
   hasLetterO,
@@ -62,16 +62,18 @@ export const Menu = () => {
     if (hasLetterA(transcript)) {
       resetTranscript();
       handleClickHelpButton();
-    } else if (hasLetterC(transcript) || transcript.includes('se')) {
+    } else if (hasLetterC(transcript)) {
       resetTranscript();
       handleClickChatButton();
-    } else if (hasLetterD(transcript) || transcript.includes('de')) {
+    } else if (hasLetterF(transcript)) {
       resetTranscript();
       handleClickCloseModal();
-    } else if (hasLetterE(transcript)) {
-      resetTranscript();
-      handleClickFirstChatOption();
-    } else if (hasLetterO(transcript) || transcript.includes('ó')) {
+    }
+    // else if (hasLetterE(transcript)) {
+    //   resetTranscript();
+    //   handleClickFirstChatOption();
+    // }
+    else if (hasLetterO(transcript)) {
       resetTranscript();
       handleClickSecondChatOption();
     } else if (hasLetterG(transcript)) {
