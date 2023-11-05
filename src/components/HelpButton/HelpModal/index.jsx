@@ -17,7 +17,7 @@ export function HelpModal({ setIsOpen, list }) {
             <ul>
               <li>
                 <a id="closeModal" onClick={() => setIsOpen(false)}>
-                  D - Para fechar ajuda
+                  F - Para fechar ajuda
                 </a>
               </li>
 
