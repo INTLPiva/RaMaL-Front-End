@@ -58,6 +58,41 @@ export const Container = styled.div`
     li {
       margin-bottom: 1rem;
     }
+
+    .custom-file-upload {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .custom-file-upload:hover {
+      background-color: #45a049;
+    }
+
+    input[type='file'] {
+      display: none;
+    }
+
+    .save-button {
+      border: none;
+      padding: 0.6rem 2rem;
+      margin-top: 1rem;
+      font-size: 2rem;
+      font-weight: 700;
+      border-radius: 4px;
+      color: #fff;
+      background-color: #2e8b57;
+      min-width: 18rem;
+    }
+
+    .save-button:hover {
+      background-color: #1f6140;
+    }
   }
 
   .buttonSubmit {

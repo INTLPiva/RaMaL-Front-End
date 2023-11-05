@@ -9,7 +9,6 @@ import { api } from '../../services/api';
 
 export function ChooseFileModal({ setIsOpen }) {
   const [file, setFile] = useState(null);
-  // const [bookName, setBookName] = useState('');
 
   const { setLoading } = useAuth();
 
@@ -47,13 +46,20 @@ export function ChooseFileModal({ setIsOpen }) {
             <h5 className="heading">Adicione um livro</h5>
           </div>
           <div className="modalContent">
-            {/* <input
-              type="text"
-              value={bookName}
-              onChange={(e) => setBookName(e.target.value)}
-            /> */}
-            <input type="file" accept=".pdf" onChange={handleChangeFile} />
-            <button onClick={handleSaveFile}>Salvar</button>
+            <label htmlFor="fileInput" className="custom-file-upload">
+              {file === null ? 'Escolher arquivo' : file?.name}
+            </label>
+            <input
+              type="file"
+              accept=".pdf"
+              onChange={handleChangeFile}
+              id="fileInput"
+            />
+            {file !== null ? (
+              <button className="save-button" onClick={handleSaveFile}>
+                Salvar
+              </button>
+            ) : null}
           </div>
         </div>
       </div>

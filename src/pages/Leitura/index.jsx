@@ -30,12 +30,14 @@ import {
 } from '../../utils/hasLetter';
 
 export const Leitura = ({ pdf }) => {
-  const optionList = [
-    'B - Para voltar para o Menu',
-    'C - Para abrir o chat',
-    '1 - Para voltar uma página',
-    '2 - Para passar uma página',
-  ];
+  const optionList = !pdf.length
+    ? ['B - Para voltar para o Menu', 'C - Para abrir o chat']
+    : [
+        'B - Para voltar para o Menu',
+        'C - Para abrir o chat',
+        '1 - Para voltar uma página',
+        '2 - Para passar uma página',
+      ];
 
   const { transcript, resetTranscript } = useSpeechRecognition();
   const microphoneRef = useRef(null);
@@ -120,6 +122,25 @@ export const Leitura = ({ pdf }) => {
     if (pdf[currentPage]?.trim() === '') incrementCount();
   }, [pdf]);
 
+  if (!pdf.length) {
+    return (
+      <>
+        <BackButton page={'../menu'} />
+
+        <Container>
+          <div className="textEnd">
+            <h1>Selecione um livro na aba Biblioteca</h1>
+          </div>
+
+          <TranscriptContainer transcript={transcript} />
+        </Container>
+
+        <HelpButton list={optionList} />
+        <ChatButton />
+      </>
+    );
+  }
+
   return (
     <>
       <BackButton page={'../menu'} />
@@ -145,19 +166,20 @@ export const Leitura = ({ pdf }) => {
           </>
         ) : (
           <>
-            <div className="textHeader">
-              <h2>Página atual: {currentPage + 1}</h2>
-              <div>
-                <button className="orangeButton" onClick={decrementCount}>
-                  Anterior <Badge text={'1'} />
-                </button>
-                <button className="blueButton" onClick={incrementCount}>
-                  Próxima <Badge text={'2'} />
-                </button>
-              </div>
-            </div>
-            <div className="textContainer">
+            <div className="textEnd">
               <h1>ACABOU</h1>
+            </div>
+
+            <div className="textFooter">
+              <button className="backPageButton" onClick={decrementCount}>
+                Anterior <Badge text={'1'} />
+              </button>
+
+              <h2>Página atual: {currentPage + 1}</h2>
+
+              <button className="nextPageButton" onClick={incrementCount}>
+                Próxima <Badge text={'2'} />
+              </button>
             </div>
           </>
         )}

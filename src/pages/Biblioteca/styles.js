@@ -15,12 +15,19 @@ export const Container = styled.div`
     text-align: center;
     /* margin-top: 20px; */
 
-    span {
+    p {
       font-size: 1.6rem;
       font-weight: 700;
       align-items: center;
       display: flex;
       text-align: center;
+    }
+
+    .disableFileContainer {
+      cursor: not-allowed;
+    }
+    .disableFileModal {
+      pointer-events: none;
     }
   }
 

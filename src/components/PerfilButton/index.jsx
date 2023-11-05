@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+// import { Gear } from 'phosphor-react';
 import PropTypes from 'prop-types';
 
 import { Container } from './styles';
@@ -22,13 +23,13 @@ export const PerfilButton = () => {
   return (
     <Container>
       <button id="perfilButton" className="button" onClick={handleClick}>
+        {/* <Gear size={40} /> */}
         Perfil <Badge text="B" />
       </button>
 
       {isOpenPerfil && (
         <div className="perfilOptions">
           <ul>
-            <li>Informações</li>
             <li>Cuidadores</li>
             <li onClick={signOut}>Sair</li>
           </ul>

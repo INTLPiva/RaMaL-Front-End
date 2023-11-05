@@ -75,6 +75,7 @@ export const Biblioteca = ({ setPdf }) => {
 
   async function handleDeletePDF(id) {
     setLoading(true);
+    resetTranscript();
     try {
       const response = await api.delete(`/pdfs/${id}`);
 
@@ -90,6 +91,7 @@ export const Biblioteca = ({ setPdf }) => {
 
   async function handleGetPDF(id) {
     setLoading(true);
+    resetTranscript();
     try {
       const response = await api.get(`/pdfs/${id}`);
       setPdf(response.data);
@@ -124,17 +126,37 @@ export const Biblioteca = ({ setPdf }) => {
       transcript.includes('1') ||
       transcript.includes('Um')
     ) {
-      resetTranscript();
-      setPdf('/pdfs/o_pequeno_principe.pdf');
-      navigate('../leitura');
+      handleGetPDF(books[0]?.id);
     } else if (
       transcript.includes('dois') ||
       transcript.includes('2') ||
       transcript.includes('Dois')
     ) {
-      resetTranscript();
-      setPdf('/pdfs/o_curioso_caso_de_benjamin_button.pdf');
-      navigate('../leitura');
+      handleGetPDF(books[1]?.id);
+    } else if (
+      transcript.includes('três') ||
+      transcript.includes('3') ||
+      transcript.includes('Três')
+    ) {
+      handleGetPDF(books[2]?.id);
+    } else if (
+      transcript.includes('quatro') ||
+      transcript.includes('4') ||
+      transcript.includes('Quatro')
+    ) {
+      handleGetPDF(books[3]?.id);
+    } else if (
+      transcript.includes('cinco') ||
+      transcript.includes('5') ||
+      transcript.includes('Cinco')
+    ) {
+      handleGetPDF(books[4]?.id);
+    } else if (
+      transcript.includes('seis') ||
+      transcript.includes('6') ||
+      transcript.includes('Seis')
+    ) {
+      handleGetPDF(books[5]?.id);
     }
   }, [transcript]);
 
@@ -162,13 +184,22 @@ export const Biblioteca = ({ setPdf }) => {
       <Container>
         <div className="listCard">
           <div className="listHeader">
-            <span>Livros</span>
-            <a>
-              <PlusCircle
-                size={40}
-                onClick={() => setIsOpenChooseFileModal(true)}
-              />
-            </a>
+            <p>Livros (max: 6)</p>
+
+            {books.length < 6 ? (
+              <a>
+                <PlusCircle
+                  size={40}
+                  onClick={() => setIsOpenChooseFileModal(true)}
+                />
+              </a>
+            ) : (
+              <div className="disableFileContainer">
+                <a className="disableFileModal">
+                  <PlusCircle size={40} />
+                </a>
+              </div>
+            )}
           </div>
 
           {books.length ? (
@@ -185,13 +216,7 @@ export const Biblioteca = ({ setPdf }) => {
                         onClick={() => handleDeletePDF(item.id)}
                       />
                     </a>
-                    <a
-                      // onClick={() => {
-                      //   setPdf('/pdfs/o_pequeno_principe.pdf');
-                      //   navigate('../leitura');
-                      // }}
-                      onClick={() => handleGetPDF(item.id)}
-                    >
+                    <a onClick={() => handleGetPDF(item.id)}>
                       <ArrowRight size={32} />
                     </a>
                   </div>
@@ -203,39 +228,6 @@ export const Biblioteca = ({ setPdf }) => {
               <h1>Não existem livros cadastrados</h1>
             </div>
           )}
-
-          {/* <div className="listItems">
-            <span>1 - O Pequeno Príncipe</span>
-            <div>
-              <a>
-                <Trash size={32} />
-              </a>
-              <a
-                onClick={() => {
-                  setPdf('/pdfs/o_pequeno_principe.pdf');
-                  navigate('../leitura');
-                }}
-              >
-                <ArrowRight size={32} />
-              </a>
-            </div>
-          </div>
-          <div className="listItems">
-            <span>2 - O Curioso Caso de Benjamin Button</span>
-            <div>
-              <a>
-                <Trash size={32} />
-              </a>
-              <a
-                onClick={() => {
-                  setPdf('/pdfs/o_curioso_caso_de_benjamin_button.pdf');
-                  navigate('../leitura');
-                }}
-              >
-                <ArrowRight size={32} />
-              </a>
-            </div>
-          </div> */}
         </div>
 
         <TranscriptContainer transcript={transcript} />

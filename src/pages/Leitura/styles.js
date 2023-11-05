@@ -25,6 +25,19 @@ export const Container = styled.div`
     }
   }
 
+  .textEnd {
+    position: fixed;
+    top: 5rem;
+    width: 70%;
+    height: 68%;
+    padding: 1rem;
+    border-radius: 4px;
+    background: #f0fff0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .textFooter {
     display: flex;
     text-align: center;
