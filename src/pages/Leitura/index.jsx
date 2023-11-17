@@ -1,12 +1,13 @@
 import 'regenerator-runtime/runtime';
 import React, { useState, useEffect, useRef } from 'react';
 
+import { ArrowDown, ArrowUp } from 'phosphor-react';
 import PropTypes from 'prop-types';
 import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
 
-import { Container } from './styles';
+import { Container, IconButton, IconsContainer } from './styles';
 import { BackButton } from '../../components/BackButton';
 import { Badge } from '../../components/Badge';
 import { ChatButton } from '../../components/ChatButton';
@@ -28,7 +29,12 @@ import {
   // hasLetterE,
   hasLetterO,
 } from '../../utils/hasLetter';
-import { hasNumber1, hasNumber2 } from '../../utils/hasNumber';
+import {
+  hasNumber1,
+  hasNumber2,
+  hasNumber3,
+  hasNumber4,
+} from '../../utils/hasNumber';
 
 export const Leitura = ({ pdf }) => {
   const optionList = !pdf.length
@@ -85,6 +91,10 @@ export const Leitura = ({ pdf }) => {
     else if (hasLetterO(transcript)) {
       resetTranscript();
       handleClickSecondChatOption();
+    } else if (hasNumber3(transcript)) {
+      sendScrollToTop();
+    } else if (hasNumber4(transcript)) {
+      sendScrollToBottom();
     }
   }, [transcript]);
 
@@ -117,6 +127,38 @@ export const Leitura = ({ pdf }) => {
     if (pdf[currentPage]?.trim() === '') incrementCount();
   }, [pdf]);
 
+  function sendScrollToBottom() {
+    const textContainer = document.getElementById('textContainer');
+
+    if (textContainer && textContainer.scrollTo) {
+      textContainer.scrollTo({
+        top: textContainer.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  }
+
+  function sendScrollToTop() {
+    const textContainer = document.getElementById('textContainer');
+
+    if (textContainer && textContainer.scrollTo) {
+      textContainer.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
+  }
+
+  useEffect(() => {
+    const textContainer = document.getElementById('textContainer');
+
+    if (textContainer && textContainer.scrollTo) {
+      textContainer.scrollTo({
+        top: 0,
+      });
+    }
+  }, [currentPage]);
+
   if (!pdf.length) {
     return (
       <>
@@ -143,7 +185,7 @@ export const Leitura = ({ pdf }) => {
       <Container>
         {currentPage < numPages ? (
           <>
-            <div className="textContainer">
+            <div className="textContainer" id="textContainer">
               <p>{pdf[currentPage]}</p>
             </div>
 
@@ -181,6 +223,18 @@ export const Leitura = ({ pdf }) => {
 
         <TranscriptContainer transcript={transcript} />
       </Container>
+
+      <IconsContainer>
+        <IconButton onClick={() => sendScrollToTop()}>
+          <ArrowUp weight="bold" />
+          <Badge text={'3'} />
+        </IconButton>
+
+        <IconButton onClick={() => sendScrollToBottom()}>
+          <ArrowDown weight="bold" />
+          <Badge text={'4'} />
+        </IconButton>
+      </IconsContainer>
 
       <HelpButton list={optionList} />
       <ChatButton />

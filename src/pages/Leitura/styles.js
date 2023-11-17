@@ -22,6 +22,8 @@ export const Container = styled.div`
     p {
       color: #000;
       font-size: 1.4rem;
+      height: 100%;
+      width: 100%;
     }
   }
 
@@ -89,5 +91,33 @@ export const Container = styled.div`
     .nextPageButton:active {
       background-color: #15432d;
     }
+  }
+`;
+
+export const IconsContainer = styled.div`
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 3rem;
+  bottom: 13rem;
+  right: 10rem;
+
+  gap: 1rem;
+`;
+
+export const IconButton = styled.button`
+  position: relative;
+
+  display: flex;
+  padding: 0.75rem;
+
+  gap: 0.625rem;
+
+  background: #f0fff0;
+  border: 4px solid #a0aec03d;
+  border-radius: 50%;
+
+  svg {
+    color: #a0aec0;
   }
 `;
