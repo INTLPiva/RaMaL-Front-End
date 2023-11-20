@@ -3,24 +3,33 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Container } from './styles';
-// import { Badge } from '../../components/Badge';
 import { Card } from '../../components/Card';
-// import { ChatButton } from '../../components/ChatButton';
-// import { HelpButton } from '../../components/HelpButton';
 import { Input } from '../../components/Input';
 import { useAuth } from '../../contexts/AuthContext';
+import { api } from '../../services/api';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState();
 
   const navigate = useNavigate();
-  const { signIn, setLoading } = useAuth();
+  const { signIn, setLoading, setTokenCaregiver } = useAuth();
 
   async function handleLogin() {
     setLoading(true);
     const data = { email, password };
     const logged = await signIn(data);
+    const userId = localStorage.getItem('userId');
+
+    try {
+      const response = await api.get(`/caregivers/${userId}`);
+
+      localStorage.setItem('tokenCaregiver', response.data.token);
+      setTokenCaregiver(response.data.token);
+    } catch (error) {
+      setLoading(false);
+    }
+
     setLoading(false);
     if (logged) {
       navigate('/');
@@ -50,19 +59,14 @@ export const Login = () => {
             <div className="buttons">
               <button className="entrar-button" onClick={handleLogin}>
                 Entrar
-                {/* <Badge text="1" /> */}
               </button>
               <button className="voltar-button" onClick={() => navigate('/')}>
                 Voltar
-                {/* <Badge text="2" /> */}
               </button>
             </div>
           </>
         </Card>
       </Container>
-
-      {/* <HelpButton />
-      <ChatButton /> */}
     </>
   );
 };

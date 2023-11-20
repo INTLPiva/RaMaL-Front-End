@@ -6,6 +6,7 @@ import React, {
   useEffect,
 } from 'react';
 
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 import { Loading } from '../components/Loading';
@@ -13,18 +14,21 @@ import { api, setAuthorization } from '../services/api';
 
 const AuthContext = createContext({});
 
-// eslint-disable-next-line react/prop-types
 function AuthProvider({ children }) {
   const [userLogged, setUserLogged] = useState(
     () => localStorage.getItem('token') !== null
   );
-  const [user, setUser] = useState(() => {
-    const user = localStorage.getItem('user') || {};
-    return user;
+  const [userId, setUserId] = useState(() => {
+    const userId = localStorage.getItem('userId') || '';
+    return userId;
   });
   const [token, setToken] = useState(() => {
     const token = localStorage.getItem('token') || '';
     return token;
+  });
+  const [tokenCaregiver, setTokenCaregiver] = useState(() => {
+    const tokenCaregiver = localStorage.getItem('tokenCaregiver') || '';
+    return tokenCaregiver;
   });
 
   const [loading, setLoading] = useState(false);
@@ -57,11 +61,11 @@ function AuthProvider({ children }) {
       const newToken = `${response.data.token}`;
       setAuthorization(newToken);
       delete response.data.user.password;
-      setUser(response.data.user);
+      setUserId(response.data.user.id);
       setToken(newToken);
       setUserLogged(true);
       localStorage.setItem('token', newToken);
-      localStorage.setItem('user', response.data.user);
+      localStorage.setItem('userId', response.data.user.id);
       return true;
     } catch (error) {
       toast.error('Credenciais Incorretas');
@@ -70,25 +74,29 @@ function AuthProvider({ children }) {
 
   async function signOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('tokenCaregiver');
     setUserLogged(false);
     setToken('');
-    setUser('');
+    setUserId('');
+    setTokenCaregiver('');
   }
 
   const value = useMemo(
     () => ({
       signIn,
       signOut,
-      user,
+      userId,
       token,
       userLogged,
       loading,
       setLoading,
+      tokenCaregiver,
+      setTokenCaregiver,
     }),
     [token]
   );
 
-  // eslint-disable-next-line react/react-in-jsx-scope
   return (
     <AuthContext.Provider value={value}>
       {children}
@@ -96,6 +104,10 @@ function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+
+AuthProvider.propTypes = {
+  children: PropTypes.element,
+};
 
 function useAuth() {
   const context = useContext(AuthContext);

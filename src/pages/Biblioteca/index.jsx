@@ -46,8 +46,10 @@ import {
 export const Biblioteca = ({ setPdf }) => {
   const [isOpenChooseFileModal, setIsOpenChooseFileModal] = useState(false);
   const [books, setBooks] = useState([]);
-  const { setLoading, user } = useAuth();
+  const { setLoading, userId } = useAuth();
   const navigate = useNavigate();
+
+  const [caregiver, setCaregiver] = useState({});
 
   const optionList = [
     'B - Para voltar para o Menu',
@@ -152,9 +154,23 @@ export const Biblioteca = ({ setPdf }) => {
     }
   }, [transcript]);
 
+  async function getCaregiver() {
+    try {
+      setLoading(true);
+      const response = await api.get(`/caregivers/${userId}`);
+
+      setCaregiver(response.data);
+
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
     resetTranscript();
     handleListening();
+    getCaregiver();
   }, []);
 
   useEffect(() => {
@@ -167,7 +183,7 @@ export const Biblioteca = ({ setPdf }) => {
 
   useEffect(() => {
     getBooks();
-  }, [user]);
+  }, [userId]);
 
   return (
     <>
@@ -226,7 +242,8 @@ export const Biblioteca = ({ setPdf }) => {
       </Container>
 
       <HelpButton list={optionList} />
-      <ChatButton />
+      {caregiver ? <ChatButton /> : null}
+
       {isOpenChooseFileModal && (
         <ChooseFileModal setIsOpen={setIsOpenChooseFileModal} />
       )}

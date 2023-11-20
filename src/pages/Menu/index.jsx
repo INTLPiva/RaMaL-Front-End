@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import SpeechRecognition, {
@@ -12,6 +12,8 @@ import { ChatButton } from '../../components/ChatButton';
 import { HelpButton } from '../../components/HelpButton';
 import { PerfilButton } from '../../components/PerfilButton';
 import { TranscriptContainer } from '../../components/TranscriptContainer';
+import { useAuth } from '../../contexts/AuthContext';
+import { api } from '../../services/api';
 import {
   handleClickHelpButton,
   handleClickCloseModal,
@@ -31,6 +33,9 @@ import {
 
 export const Menu = () => {
   const navigate = useNavigate();
+  const { userId, setLoading } = useAuth();
+
+  const [caregiver, setCaregiver] = useState({});
 
   const optionList = [
     'C - Para abrir chat',
@@ -85,9 +90,23 @@ export const Menu = () => {
     }
   }, [transcript]);
 
+  async function getCaregiver() {
+    try {
+      setLoading(true);
+      const response = await api.get(`/caregivers/${userId}`);
+
+      setCaregiver(response.data);
+
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
     resetTranscript();
     handleListening();
+    getCaregiver();
   }, []);
 
   useEffect(() => {
@@ -150,7 +169,7 @@ export const Menu = () => {
       </Container>
 
       <HelpButton list={optionList} />
-      <ChatButton />
+      {caregiver ? <ChatButton /> : null}
     </>
   );
 };

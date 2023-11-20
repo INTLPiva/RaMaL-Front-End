@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
-// import { Gear } from 'phosphor-react';
-import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 import { Container } from './styles';
 import { useAuth } from '../../contexts/AuthContext';
 
 export const PerfilButton = () => {
+  const navigate = useNavigate();
+
   const [isOpenPerfil, setIsOpenPerfil] = useState(false);
 
   const { signOut } = useAuth();
@@ -22,22 +23,17 @@ export const PerfilButton = () => {
   return (
     <Container>
       <button id="perfilButton" className="button" onClick={handleClick}>
-        {/* <Gear size={40} /> */}
         Perfil
       </button>
 
       {isOpenPerfil && (
         <div className="perfilOptions">
           <ul>
-            <li>Cuidadores</li>
+            <li onClick={() => navigate('../cuidador')}>Cuidador</li>
             <li onClick={signOut}>Sair</li>
           </ul>
         </div>
       )}
     </Container>
   );
-};
-
-PerfilButton.propTypes = {
-  page: PropTypes.string,
 };

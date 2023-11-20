@@ -1,45 +1,31 @@
 import React from 'react';
 
-// import axios from 'axios';
+import axios from 'axios';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 import { Container } from './styles';
+import { useAuth } from '../../../contexts/AuthContext';
 
 export function ChatModal({ setIsOpen }) {
-  // const token = '6256673882:AAE5MbTips7faQXxilM71Ku3evbdqA_sAcM';
+  const token = '6256673882:AAE5MbTips7faQXxilM71Ku3evbdqA_sAcM';
+  const { tokenCaregiver } = useAuth();
 
-  // const chatIdMari = '6618987688';
+  function sendMessage(text) {
+    const parameters = {
+      chat_id: tokenCaregiver,
+      text,
+    };
 
-  // function getData() {
-  //   axios
-  //     .get(`https://api.telegram.org/bot${token}/getUpdates`)
-  //     .then((response) => {
-  //       console.log('Dados recebidos:', response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Erro ao fazer requisição:', error);
-  //     });
-  // }
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-
-  // function sendMessage(text) {
-  //   const parameters = {
-  //     chat_id: chatIdMari,
-  //     text: text,
-  //   };
-
-  //   axios
-  //     .post(`https://api.telegram.org/bot${token}/sendMessage`, parameters)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Erro ao fazer requisição POST:', error);
-  //     });
-  // }
+    axios
+      .post(`https://api.telegram.org/bot${token}/sendMessage`, parameters)
+      .then((response) => {
+        toast.success('Mensagem enviada');
+      })
+      .catch(() => {
+        toast.warn('Erro ao enviar mensagem');
+      });
+  }
 
   return (
     <Container>
@@ -67,7 +53,9 @@ export function ChatModal({ setIsOpen }) {
               <li>
                 <a
                   id="secondChatOption"
-                  // onClick={() => sendMessage('Preciso que venha aqui, por favor')}
+                  onClick={() =>
+                    sendMessage('Preciso que venha aqui, por favor')
+                  }
                 >
                   O - Preciso que venha aqui
                 </a>

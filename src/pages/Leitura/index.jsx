@@ -13,6 +13,8 @@ import { Badge } from '../../components/Badge';
 import { ChatButton } from '../../components/ChatButton';
 import { HelpButton } from '../../components/HelpButton';
 import { TranscriptContainer } from '../../components/TranscriptContainer';
+import { useAuth } from '../../contexts/AuthContext';
+import { api } from '../../services/api';
 import {
   handleClickHelpButton,
   handleClickCloseModal,
@@ -37,6 +39,10 @@ import {
 } from '../../utils/hasNumber';
 
 export const Leitura = ({ pdf }) => {
+  const { userId, setLoading } = useAuth();
+
+  const [caregiver, setCaregiver] = useState({});
+
   const optionList = !pdf.length
     ? ['B - Para voltar para o Menu', 'C - Para abrir o chat']
     : [
@@ -98,9 +104,23 @@ export const Leitura = ({ pdf }) => {
     }
   }, [transcript]);
 
+  async function getCaregiver() {
+    try {
+      setLoading(true);
+      const response = await api.get(`/caregivers/${userId}`);
+
+      setCaregiver(response.data);
+
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
     resetTranscript();
     handleListening();
+    getCaregiver();
   }, []);
 
   useEffect(() => {
@@ -173,7 +193,7 @@ export const Leitura = ({ pdf }) => {
         </Container>
 
         <HelpButton list={optionList} />
-        <ChatButton />
+        {caregiver ? <ChatButton /> : null}
       </>
     );
   }
@@ -237,7 +257,7 @@ export const Leitura = ({ pdf }) => {
       </IconsContainer>
 
       <HelpButton list={optionList} />
-      <ChatButton />
+      {caregiver ? <ChatButton /> : null}
     </>
   );
 };
