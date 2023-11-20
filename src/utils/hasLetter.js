@@ -60,9 +60,11 @@ export const hasLetterH = (string) => {
 
 export const hasLetterO = (string) => {
   const regex1 = /\bo\b/i;
-  const regex2 = /\bó\b/i;
+  const regex2 = /^ó+$/i;
+  const regex3 = /\bou\b/i;
 
-  const result = regex1.test(string) || regex2.test(string);
+  const result =
+    regex1.test(string) || regex2.test(string) || regex3.test(string);
 
   return result;
 };
