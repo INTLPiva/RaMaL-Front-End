@@ -4,10 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { Container } from './styles';
-// import { Badge } from '../../components/Badge';
 import { Card } from '../../components/Card';
-// import { ChatButton } from '../../components/ChatButton';
-// import { HelpButton } from '../../components/HelpButton';
 import { Input } from '../../components/Input';
 import { useAuth } from '../../contexts/AuthContext';
 import { api } from '../../services/api';
@@ -76,25 +73,19 @@ export const Cadastro = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              {/* <Input name="Confirmar Senha" type="password" /> */}
             </div>
 
             <div className="buttons">
               <button className="cadastrar-button" onClick={handleSubmit}>
                 Cadastrar
-                {/* <Badge text="1" /> */}
               </button>
               <button className="voltar-button" onClick={() => navigate('/')}>
                 Voltar
-                {/* <Badge text="2" /> */}
               </button>
             </div>
           </>
         </Card>
       </Container>
-
-      {/* <HelpButton />
-      <ChatButton /> */}
     </>
   );
 };
