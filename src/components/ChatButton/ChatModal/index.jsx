@@ -23,22 +23,30 @@ export function ChatModal({ setIsOpen }) {
         toast.success('Mensagem enviada');
       })
       .catch(() => {
-        toast.warn('Erro ao enviar mensagem');
+        toast.error('Erro ao enviar mensagem');
       });
   }
 
   return (
     <Container>
-      <div className="darkBG" onClick={() => setIsOpen(false)} />
+      <div
+        className="darkBG"
+        data-testid="dark-bg"
+        onClick={() => setIsOpen(false)}
+      />
       <div className="centered">
-        <div className="modal">
+        <div className="modal" data-testid="chat-modal">
           <div className="modalHeader">
             <h5 className="heading">Comandos do chat</h5>
           </div>
           <div className="modalContent">
             <ul>
               <li>
-                <a id="closeModal" onClick={() => setIsOpen(false)}>
+                <a
+                  id="closeModal"
+                  data-testid="close-modal"
+                  onClick={() => setIsOpen(false)}
+                >
                   F - Para fechar chat
                 </a>
               </li>

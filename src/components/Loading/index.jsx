@@ -6,7 +6,7 @@ import { Container } from './styles';
 
 export function Loading({ visible }) {
   return (
-    <Container visible={visible}>
+    <Container data-testid="loading-container" visible={visible}>
       <div />
     </Container>
   );

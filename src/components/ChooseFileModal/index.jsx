@@ -39,9 +39,13 @@ export function ChooseFileModal({ setIsOpen }) {
 
   return (
     <Container>
-      <div className="darkBG" onClick={() => setIsOpen(false)} />
+      <div
+        className="darkBG"
+        data-testid="dark-bg"
+        onClick={() => setIsOpen(false)}
+      />
       <div className="centered">
-        <div className="modal">
+        <div className="modal" data-testid="choose-file-modal">
           <div className="modalHeader">
             <h5 className="heading">Adicione um livro</h5>
           </div>

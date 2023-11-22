@@ -11,6 +11,7 @@ export const ChatButton = () => {
     <Container>
       <button
         id="chatButton"
+        data-testid="chat-button"
         className="button"
         onClick={() => setIsOpenModal(true)}
       >

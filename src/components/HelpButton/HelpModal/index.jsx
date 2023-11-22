@@ -7,16 +7,24 @@ import { Container } from './styles';
 export function HelpModal({ setIsOpen, list }) {
   return (
     <Container>
-      <div className="darkBG" onClick={() => setIsOpen(false)} />
+      <div
+        className="darkBG"
+        data-testid="dark-bg"
+        onClick={() => setIsOpen(false)}
+      />
       <div className="centered">
-        <div className="modal">
+        <div className="modal" data-testid="help-modal">
           <div className="modalHeader">
             <h5 className="heading">Comandos de voz</h5>
           </div>
           <div className="modalContent">
             <ul>
               <li>
-                <a id="closeModal" onClick={() => setIsOpen(false)}>
+                <a
+                  id="closeModal"
+                  data-testid="close-modal"
+                  onClick={() => setIsOpen(false)}
+                >
                   F - Para fechar ajuda
                 </a>
               </li>

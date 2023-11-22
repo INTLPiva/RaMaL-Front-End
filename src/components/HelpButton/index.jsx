@@ -13,6 +13,7 @@ export const HelpButton = ({ list }) => {
     <Container>
       <button
         id="helpButton"
+        data-testid="help-button"
         className="button"
         onClick={() => setIsOpenModal(true)}
       >
