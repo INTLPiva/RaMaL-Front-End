@@ -215,7 +215,7 @@ export const Biblioteca = ({ setPdf }) => {
               <>
                 <div className="listItems">
                   <span>
-                    {index + 1} - {item.name}
+                    <span className="bookIndex">{index + 1}</span> {item.name}
                   </span>
                   <div>
                     <a>

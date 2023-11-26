@@ -56,6 +56,14 @@ export const Container = styled.div`
     justify-content: space-between;
     border: 1px solid black;
 
+    .bookIndex {
+      background-color: #ff3333;
+      color: white;
+      border-radius: 50%;
+      padding: 0.25rem 0.5rem;
+      font-size: 1rem;
+    }
+
     span {
       color: #000;
       font-size: 1.5rem;

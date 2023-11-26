@@ -119,7 +119,7 @@ export const Cuidador = () => {
   if (!caregiver) {
     return (
       <>
-        <BackButton page={'../menu'} />
+        <BackButton page={'../menu'} hasBadge={false} />
 
         <Container>
           <WarningCard>
@@ -137,11 +137,16 @@ export const Cuidador = () => {
               <br />
 
               <h3>
-                Caso autorizado, em seguida, no Telegram pesquise pelo ChatBot
-                chamado RaMaL (nome de usuário @projetoRamal_bot) e envie um
-                'Olá' para que seja gerado o token único do Telegram para
-                receber as mensagens programadas. Após o envio da mensagem
-                clique no botão abaixo e aguarde a requisição ser feita.
+                Caso autorizado, em seguida, no Telegram pesquise por
+                @projetoRamal_bot e envie um 'Olá' para que seja gerado o token
+                único do Telegram para receber as mensagens programadas.
+              </h3>
+
+              <br />
+
+              <h3>
+                Após o envio da mensagem clique no botão abaixo e aguarde a
+                requisição ser feita.
               </h3>
             </div>
 
@@ -175,7 +180,7 @@ export const Cuidador = () => {
 
   return (
     <>
-      <BackButton page={'../menu'} />
+      <BackButton page={'../menu'} hasBadge={false} />
 
       <Container>
         <WarningCard>
@@ -195,13 +200,14 @@ export const Cuidador = () => {
               * Após excluído o cuidador está ação não poderá ser desfeita *
             </h3>
             <br />
-            <button
-              className="delete-button"
-              onClick={() => handleDeleteCaregiver(caregiver.id)}
-            >
-              Excluir cuidador
-            </button>
           </div>
+
+          <button
+            className="delete-button"
+            onClick={() => handleDeleteCaregiver(caregiver.id)}
+          >
+            Excluir cuidador
+          </button>
         </WarningCard>
       </Container>
     </>
