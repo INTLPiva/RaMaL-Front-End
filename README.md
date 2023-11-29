@@ -44,3 +44,9 @@ yarn
 ```bash
 yarn start
 ```
+
+4. Rode os testes
+
+```bash
+yarn test
+```
