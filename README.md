@@ -4,7 +4,7 @@
   - [⚡️ O Projeto](#️-o-projeto)
   - [🧑‍💻 Integrantes](#-integrantes)
   - [🖥️ Tecnologias Usadas](#️-tecnologias-usadas)
-  - [⚙️ Instale antes de tentar executar o projeto)](#️-instale-antes-de-tentar-executar-o-projeto)
+  - [⚙️ Instale antes de tentar executar o projeto](#️-instale-antes-de-tentar-executar-o-projeto)
   - [🚀️ Executando os projetos](#️-executando-os-projetos)
 
 ## ⚡️ O Projeto
@@ -25,7 +25,7 @@ Aplicação Web desenvolvido em React para leitura de livros em pdf usando coman
 
 - [Yarn](https://yarnpkg.com/)
 
-## 🚀️ Executando os projetos
+## 🚀️ Executando o projeto
 
 1. Clone o repositório:
 
