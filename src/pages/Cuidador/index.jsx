@@ -4,7 +4,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-import { Container, WarningCard } from './styles';
+import {
+  Container,
+  DeleteButton,
+  Header,
+  RegisterButton,
+  Title,
+  TokenButton,
+  WarningCard,
+} from './styles';
 import { BackButton } from '../../components/BackButton';
 import { useAuth } from '../../contexts/AuthContext';
 import { api } from '../../services/api';
@@ -118,98 +126,90 @@ export const Cuidador = () => {
 
   if (!caregiver) {
     return (
-      <>
-        <BackButton page={'../menu'} hasBadge={false} />
+      <Container>
+        <Header>
+          <BackButton page={'../menu'} />
+        </Header>
+        <WarningCard>
+          <Title>Tutorial para cadastro de cuidador</Title>
 
-        <Container>
-          <WarningCard>
-            <h1 className="title">Tutorial para cadastro de cuidador</h1>
-
-            <div className="description">
-              <h3>
-                Para ser possível a criação do canal de comunicação entre o
-                paciente e o cuidador, é preciso que o cuidador tenha uma conta
-                de usuário no Telegram. Solicitamos a autorização para armazenar
-                em nuvem a identificação única do chat entre a conta e o ChatBot
-                do RaMaL.
-              </h3>
-
-              <br />
-
-              <h3>
-                Caso autorizado, em seguida, no Telegram pesquise por
-                @projetoRamal_bot e envie um 'Olá' para que seja gerado o token
-                único do Telegram para receber as mensagens programadas.
-              </h3>
-
-              <br />
-
-              <h3>
-                Após o envio da mensagem clique no botão abaixo e aguarde a
-                requisição ser feita.
-              </h3>
-            </div>
-
-            <button className="token-button" onClick={() => getToken()}>
-              Pegar token
-            </button>
-
+          <div>
             <h3>
-              Após gerado o token clique no botão abaixo para cadastrar o
-              cuidador.
+              Para ser possível a criação do canal de comunicação entre o
+              paciente e o cuidador, é preciso que o cuidador tenha uma conta de
+              usuário no Telegram. Solicitamos a autorização para armazenar em
+              nuvem a identificação única do chat entre a conta e o ChatBot do
+              RaMaL.
             </h3>
 
-            <button
-              className="cadastrar-button"
-              onClick={() =>
-                saveCaregiverToken({
-                  name: nomeCuidador.toString(),
-                  token: idCuidador.toString(),
-                  userId: userId.toString(),
-                })
-              }
-              disabled={!idCuidador && !nomeCuidador}
-            >
-              Cadastrar
-            </button>
-          </WarningCard>
-        </Container>
-      </>
+            <br />
+
+            <h3>
+              Caso autorizado, em seguida, no Telegram pesquise por
+              @projetoRamal_bot e envie um 'Olá' para que seja gerado o token
+              único do Telegram para receber as mensagens programadas.
+            </h3>
+
+            <br />
+
+            <h3>
+              Após o envio da mensagem clique no botão abaixo e aguarde a
+              requisição ser feita.
+            </h3>
+          </div>
+
+          <TokenButton onClick={() => getToken()}>Pegar token</TokenButton>
+
+          <h3>
+            Após gerado o token clique no botão abaixo para cadastrar o
+            cuidador.
+          </h3>
+
+          <RegisterButton
+            onClick={() =>
+              saveCaregiverToken({
+                name: nomeCuidador.toString(),
+                token: idCuidador.toString(),
+                userId: userId.toString(),
+              })
+            }
+            disabled={!idCuidador && !nomeCuidador}
+          >
+            Cadastrar
+          </RegisterButton>
+        </WarningCard>
+      </Container>
     );
   }
 
   return (
-    <>
-      <BackButton page={'../menu'} hasBadge={false} />
+    <Container>
+      <Header>
+        <BackButton page={'../menu'} />
+      </Header>
+      <WarningCard>
+        <Title>Já existe um cuidador cadastrado</Title>
 
-      <Container>
-        <WarningCard>
-          <h1 className="title">Já existe um cuidador cadastrado</h1>
+        <div>
+          <h2>
+            Só é possível cadastrar 1 cuidador, para cadastrar outra pessoa é
+            necessário excluir o atual.
+          </h2>
+        </div>
 
-          <div className="description">
-            <h2>
-              Só é possível cadastrar 1 cuidador, para cadastrar outra pessoa é
-              necessário excluir o atual.
-            </h2>
-          </div>
+        <div>
+          <h2>Clique no botão abaixo para excluir</h2>
+          <br />
+          <h3>
+            * Após excluído o cuidador está ação não poderá ser desfeita *
+          </h3>
+          <br />
+        </div>
 
-          <div>
-            <h2>Clique no botão abaixo para excluir</h2>
-            <br />
-            <h3>
-              * Após excluído o cuidador está ação não poderá ser desfeita *
-            </h3>
-            <br />
-          </div>
-
-          <button
-            className="delete-button"
-            onClick={() => handleDeleteCaregiver(caregiver.id)}
-          >
-            Excluir cuidador
-          </button>
-        </WarningCard>
-      </Container>
-    </>
+        <DeleteButton onClick={() => handleDeleteCaregiver(caregiver.id)}>
+          Excluir cuidador
+        </DeleteButton>
+      </WarningCard>
+    </Container>
   );
 };

@@ -3,7 +3,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { Container } from './styles';
+import {
+  Buttons,
+  Container,
+  RegisterButton,
+  ReturnButton,
+  Title,
+} from './styles';
 import { Card } from '../../components/Card';
 import { Input } from '../../components/Input';
 import { useAuth } from '../../contexts/AuthContext';
@@ -48,44 +54,36 @@ export const Cadastro = () => {
   }
 
   return (
-    <>
-      <Container>
-        <Card color={'#FFFFCC'}>
-          <>
-            <h1 className="title">Cadastro</h1>
+    <Container>
+      <Card color={'#FFFFCC'}>
+        <Title>Cadastro</Title>
 
-            <div className="inputs">
-              <Input
-                name="Nome"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <Input
-                name="Email"
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Input
-                name="Senha"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+        <div>
+          <Input
+            name="Nome"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Input
+            name="Email"
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            name="Senha"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
 
-            <div className="buttons">
-              <button className="cadastrar-button" onClick={handleSubmit}>
-                Cadastrar
-              </button>
-              <button className="voltar-button" onClick={() => navigate('/')}>
-                Voltar
-              </button>
-            </div>
-          </>
-        </Card>
-      </Container>
-    </>
+        <Buttons>
+          <RegisterButton onClick={handleSubmit}>Cadastrar</RegisterButton>
+          <ReturnButton onClick={() => navigate('/')}>Voltar</ReturnButton>
+        </Buttons>
+      </Card>
+    </Container>
   );
 };

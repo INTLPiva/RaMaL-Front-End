@@ -47,25 +47,17 @@ export function ChatModal({ setIsOpen }) {
                   data-testid="close-modal"
                   onClick={() => setIsOpen(false)}
                 >
-                  F - Para fechar chat
+                  Fechar - Para fechar chat
                 </a>
               </li>
-              {/* <li>
-                <a
-                  id="firstChatOption"
-                  // onClick={() => sendMessage('Desejo comer algo, por favor')}
-                >
-                  E - Desejo comer algo
-                </a>
-              </li> */}
               <li>
                 <a
-                  id="secondChatOption"
+                  id="firstChatOption"
                   onClick={() =>
                     sendMessage('Preciso que venha aqui, por favor')
                   }
                 >
-                  O - Preciso que venha aqui
+                  Chamar - Para chamar seu cuidador
                 </a>
               </li>
             </ul>

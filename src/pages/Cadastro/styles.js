@@ -1,60 +1,56 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 100vh;
+  height: 100%;
   background-color: #ffff99;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
+`;
 
-  .title {
-    font-size: 5rem;
-    color: #000;
-  }
+export const Title = styled.h1`
+  font-size: 5rem;
+  color: #000;
+`;
 
-  .cadastrar-button {
-    position: relative;
-    border: none;
-    padding: 0.6rem 2rem;
-    font-size: 3rem;
-    font-weight: 700;
-    border-radius: 4px;
-    color: #fff;
-    background-color: #ffd700;
-    min-width: 18rem;
-  }
+export const Buttons = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 18rem;
+`;
 
-  .cadastrar-button:hover {
+export const RegisterButton = styled.button`
+  padding: 0.6rem 2rem;
+  font-size: 3rem;
+  font-weight: 700;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #ffd700;
+
+  &:hover {
     background-color: #cca800;
   }
 
-  .cadastrar-button:active {
+  &:active {
     background-color: #b28d00;
   }
+`;
 
-  .voltar-button {
-    position: relative;
-    border: none;
-    padding: 0.6rem 2rem;
-    font-size: 3rem;
-    font-weight: 700;
-    border-radius: 4px;
-    color: #fff;
-    background-color: #f5e664;
-    min-width: 18rem;
-  }
+export const ReturnButton = styled.button`
+  padding: 0.6rem 2rem;
+  font-size: 3rem;
+  font-weight: 700;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #f5e664;
 
-  .voltar-button:hover {
+  &:hover {
     background-color: #e0d23d;
   }
 
-  .voltar-button:active {
+  &:active {
     background-color: #ccc20c;
-  }
-
-  .buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
   }
 `;

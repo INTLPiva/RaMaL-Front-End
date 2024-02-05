@@ -25,7 +25,7 @@ export function HelpModal({ setIsOpen, list }) {
                   data-testid="close-modal"
                   onClick={() => setIsOpen(false)}
                 >
-                  F - Para fechar ajuda
+                  Fechar - Para fechar ajuda
                 </a>
               </li>
 

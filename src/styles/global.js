@@ -8,8 +8,14 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
+  body, #root {
+    width: 100vw;
+    height: 100vh;
+  }
+
   body, input, button {
     font: 1rem Roboto, sans-serif;
+    border: none;
   }
 
   button, a {

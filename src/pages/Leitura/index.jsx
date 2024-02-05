@@ -7,9 +7,20 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
 
-import { Container, IconButton, IconsContainer } from './styles';
+import {
+  BackPageButton,
+  Container,
+  Footer,
+  Header,
+  IconButton,
+  IconsContainer,
+  MicrophoneContainer,
+  NextPageButton,
+  TextContainer,
+  TextFooter,
+  Wrapper,
+} from './styles';
 import { BackButton } from '../../components/BackButton';
-import { Badge } from '../../components/Badge';
 import { ChatButton } from '../../components/ChatButton';
 import { HelpButton } from '../../components/HelpButton';
 import { TranscriptContainer } from '../../components/TranscriptContainer';
@@ -20,23 +31,8 @@ import {
   handleClickCloseModal,
   handleClickBackButton,
   handleClickChatButton,
-  // handleClickFirstChatOption,
-  handleClickSecondChatOption,
+  handleClickFirstChatOption,
 } from '../../utils/handleClick';
-import {
-  hasLetterA,
-  hasLetterB,
-  hasLetterC,
-  hasLetterF,
-  // hasLetterE,
-  hasLetterO,
-} from '../../utils/hasLetter';
-import {
-  hasNumber1,
-  hasNumber2,
-  hasNumber3,
-  hasNumber4,
-} from '../../utils/hasNumber';
 
 export const Leitura = ({ pdf }) => {
   const { userId, setLoading } = useAuth();
@@ -44,12 +40,14 @@ export const Leitura = ({ pdf }) => {
   const [caregiver, setCaregiver] = useState({});
 
   const optionList = !pdf.length
-    ? ['B - Para voltar para o Menu', 'C - Para abrir o chat']
+    ? ['Voltar - Para voltar para o Menu', 'Chat - Para abrir o chat']
     : [
-        'B - Para voltar para o Menu',
-        'C - Para abrir o chat',
-        '1 - Para voltar uma página',
-        '2 - Para passar uma página',
+        'Voltar - Para voltar para o Menu',
+        'Chat - Para abrir o chat',
+        'Anterior - Para voltar uma página',
+        'Próxima - Para passar uma página',
+        'Subir - Para subir o scroll',
+        'Descer - Para descer o scroll',
       ];
 
   const { transcript, resetTranscript } = useSpeechRecognition();
@@ -57,9 +55,9 @@ export const Leitura = ({ pdf }) => {
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return (
-      <div className="microphone-container">
+      <MicrophoneContainer>
         Browser is not Support Speech Recognition.
-      </div>
+      </MicrophoneContainer>
     );
   }
 
@@ -71,35 +69,30 @@ export const Leitura = ({ pdf }) => {
   };
 
   useEffect(() => {
-    if (hasNumber1(transcript)) {
+    if (transcript.toLowerCase().includes('anterior')) {
       decrementCount();
       resetTranscript();
-    } else if (hasNumber2(transcript)) {
+    } else if (transcript.toLowerCase().includes('próxima' || 'próximo')) {
       incrementCount();
       resetTranscript();
-    } else if (hasLetterA(transcript)) {
+    } else if (transcript.toLowerCase().includes('ajuda')) {
       resetTranscript();
       handleClickHelpButton();
-    } else if (hasLetterB(transcript)) {
+    } else if (transcript.toLowerCase().includes('voltar')) {
       resetTranscript();
       handleClickBackButton();
-    } else if (hasLetterC(transcript)) {
+    } else if (transcript.toLowerCase().includes('chat')) {
       resetTranscript();
       handleClickChatButton();
-    } else if (hasLetterF(transcript)) {
+    } else if (transcript.toLowerCase().includes('fechar')) {
       resetTranscript();
       handleClickCloseModal();
-    }
-    // else if (hasLetterE(transcript)) {
-    //   resetTranscript();
-    //   handleClickFirstChatOption();
-    // }
-    else if (hasLetterO(transcript)) {
+    } else if (transcript.toLowerCase().includes('chamar')) {
       resetTranscript();
-      handleClickSecondChatOption();
-    } else if (hasNumber3(transcript)) {
+      handleClickFirstChatOption();
+    } else if (transcript.toLowerCase().includes('subir')) {
       sendScrollToTop();
-    } else if (hasNumber4(transcript)) {
+    } else if (transcript.toLowerCase().includes('descer')) {
       sendScrollToBottom();
     }
   }, [transcript]);
@@ -181,83 +174,89 @@ export const Leitura = ({ pdf }) => {
 
   if (!pdf.length) {
     return (
-      <>
-        <BackButton page={'../menu'} />
+      <Container>
+        <Header>
+          <BackButton page={'../menu'} />
+          <HelpButton list={optionList} />
+        </Header>
 
-        <Container>
-          <div className="textEnd">
+        <Wrapper>
+          <TextContainer>
             <h1>Selecione um livro na aba Biblioteca</h1>
-          </div>
+          </TextContainer>
+        </Wrapper>
+
+        <Footer>
+          <img src="/src/assets/ramal.png" alt="ramal" />
 
           <TranscriptContainer transcript={transcript} />
-        </Container>
 
-        <HelpButton list={optionList} />
-        {caregiver ? <ChatButton /> : null}
-      </>
+          {caregiver ? <ChatButton /> : <span />}
+        </Footer>
+      </Container>
     );
   }
 
   return (
     <>
-      <BackButton page={'../menu'} />
-
       <Container>
+        <Header>
+          <BackButton page={'../menu'} />
+          <HelpButton list={optionList} />
+        </Header>
+
         {currentPage < numPages ? (
           <>
-            <div className="textContainer" id="textContainer">
-              <p>{pdf[currentPage]}</p>
-            </div>
+            <Wrapper>
+              <TextContainer id="textContainer">
+                <p>{pdf[currentPage]}</p>
+              </TextContainer>
 
-            <div className="textFooter">
-              <button className="backPageButton" onClick={decrementCount}>
-                Anterior <Badge text={'1'} />
-              </button>
+              <IconsContainer>
+                <IconButton onClick={() => sendScrollToTop()}>
+                  <ArrowUp weight="bold" />
+                </IconButton>
+
+                <IconButton onClick={() => sendScrollToBottom()}>
+                  <ArrowDown weight="bold" />
+                </IconButton>
+              </IconsContainer>
+            </Wrapper>
+
+            <TextFooter>
+              <BackPageButton onClick={decrementCount}>Anterior</BackPageButton>
 
               <h2>Página atual: {currentPage + 1}</h2>
 
-              <button className="nextPageButton" onClick={incrementCount}>
-                Próxima <Badge text={'2'} />
-              </button>
-            </div>
+              <NextPageButton onClick={incrementCount}>Próxima</NextPageButton>
+            </TextFooter>
           </>
         ) : (
           <>
-            <div className="textEnd">
-              <h1>ACABOU</h1>
-            </div>
+            <Wrapper>
+              <TextContainer>
+                <h1>ACABOU</h1>
+              </TextContainer>
+            </Wrapper>
 
-            <div className="textFooter">
-              <button className="backPageButton" onClick={decrementCount}>
-                Anterior <Badge text={'1'} />
-              </button>
+            <TextFooter>
+              <BackPageButton onClick={decrementCount}>Anterior</BackPageButton>
 
               <h2>Página atual: {currentPage + 1}</h2>
 
-              <button className="nextPageButton" onClick={incrementCount}>
-                Próxima <Badge text={'2'} />
-              </button>
-            </div>
+              <NextPageButton onClick={incrementCount}>Próxima</NextPageButton>
+            </TextFooter>
           </>
         )}
 
-        <TranscriptContainer transcript={transcript} />
+        <Footer>
+          <img src="/src/assets/ramal.png" alt="ramal" />
+
+          <TranscriptContainer transcript={transcript} />
+
+          {caregiver ? <ChatButton /> : <span />}
+        </Footer>
       </Container>
-
-      <IconsContainer>
-        <IconButton onClick={() => sendScrollToTop()}>
-          <ArrowUp weight="bold" />
-          <Badge text={'3'} />
-        </IconButton>
-
-        <IconButton onClick={() => sendScrollToBottom()}>
-          <ArrowDown weight="bold" />
-          <Badge text={'4'} />
-        </IconButton>
-      </IconsContainer>
-
-      <HelpButton list={optionList} />
-      {caregiver ? <ChatButton /> : null}
     </>
   );
 };

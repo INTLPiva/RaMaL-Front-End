@@ -7,8 +7,7 @@ import { Container } from './styles';
 export function TranscriptContainer({ transcript }) {
   return (
     <Container>
-      <img className="ramal" src="/src/assets/ramal.png" alt="ramal" />
-      <p className="transcript">{transcript}</p>
+      <p>{transcript}</p>
     </Container>
   );
 }

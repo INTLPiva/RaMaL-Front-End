@@ -5,8 +5,16 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
 
-import { Container } from './styles';
-import { Badge } from '../../components/Badge';
+import {
+  Cards,
+  Container,
+  Description,
+  Footer,
+  Header,
+  MenuButton,
+  MicrophoneContainer,
+  Title,
+} from './styles';
 import { Card } from '../../components/Card';
 import { ChatButton } from '../../components/ChatButton';
 import { HelpButton } from '../../components/HelpButton';
@@ -18,18 +26,8 @@ import {
   handleClickHelpButton,
   handleClickCloseModal,
   handleClickChatButton,
-  // handleClickFirstChatOption,
-  handleClickSecondChatOption,
+  handleClickFirstChatOption,
 } from '../../utils/handleClick';
-import {
-  hasLetterA,
-  hasLetterC,
-  hasLetterF,
-  // hasLetterE,
-  hasLetterG,
-  hasLetterH,
-  hasLetterO,
-} from '../../utils/hasLetter';
 
 export const Menu = () => {
   const navigate = useNavigate();
@@ -38,9 +36,9 @@ export const Menu = () => {
   const [caregiver, setCaregiver] = useState({});
 
   const optionList = [
-    'C - Para abrir chat',
-    'G - Para ler último livro',
-    'H - Para abrir biblioteca',
+    'Chat - Para abrir chat',
+    'Ler - Para ler último livro',
+    'Entrar - Para abrir biblioteca',
   ];
 
   const { transcript, resetTranscript } = useSpeechRecognition();
@@ -48,11 +46,9 @@ export const Menu = () => {
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return (
-      <Container>
-        <div className="microphone-container">
-          Browser utilizado não suporta reconhecimento de voz.
-        </div>
-      </Container>
+      <MicrophoneContainer>
+        Browser utilizado não suporta reconhecimento de voz.
+      </MicrophoneContainer>
     );
   }
 
@@ -64,27 +60,22 @@ export const Menu = () => {
   };
 
   useEffect(() => {
-    if (hasLetterA(transcript)) {
+    if (transcript.toLowerCase().includes('ajuda')) {
       resetTranscript();
       handleClickHelpButton();
-    } else if (hasLetterC(transcript)) {
+    } else if (transcript.toLowerCase().includes('chat')) {
       resetTranscript();
       handleClickChatButton();
-    } else if (hasLetterF(transcript)) {
+    } else if (transcript.toLowerCase().includes('fechar')) {
       resetTranscript();
       handleClickCloseModal();
-    }
-    // else if (hasLetterE(transcript)) {
-    //   resetTranscript();
-    //   handleClickFirstChatOption();
-    // }
-    else if (hasLetterO(transcript)) {
+    } else if (transcript.toLowerCase().includes('chamar')) {
       resetTranscript();
-      handleClickSecondChatOption();
-    } else if (hasLetterG(transcript)) {
+      handleClickFirstChatOption();
+    } else if (transcript.toLowerCase().includes('ler')) {
       resetTranscript();
       navigate('../leitura');
-    } else if (hasLetterH(transcript)) {
+    } else if (transcript.toLowerCase().includes('entrar')) {
       resetTranscript();
       navigate('../biblioteca');
     }
@@ -118,58 +109,53 @@ export const Menu = () => {
   }, []);
 
   return (
-    <>
-      <PerfilButton />
+    <Container>
+      <Header>
+        <PerfilButton />
+        <HelpButton list={optionList} />
+      </Header>
 
-      <Container>
+      <Cards>
         <Card>
-          <h1 className="title">Leitura</h1>
+          <Title>Leitura</Title>
 
-          <div className="description">
+          <Description>
             <h3>
               Escolha uma local para apoiar seu dispositivo e Boa Leitura!
             </h3>
             <br />
             <p>Observação: será carregado o último documento selecionado.</p>
-          </div>
+          </Description>
 
-          <div className="buttons">
-            <button
-              className="menu-button"
-              onClick={() => navigate('../leitura')}
-            >
-              Ler <Badge text="G" />
-            </button>
-          </div>
+          <MenuButton onClick={() => navigate('../leitura')}>Ler</MenuButton>
         </Card>
 
         <Card>
-          <h1 className="title">Biblioteca</h1>
+          <Title>Biblioteca</Title>
 
-          <div className="description">
+          <Description>
             <h3>
               Verifique todos os títulos incluídos na Biblioteca Virtual e/ou
               adicione novos.
               <br />
+              <br />
               Selecione o documento que deseja ler.
             </h3>
-          </div>
+          </Description>
 
-          <div className="buttons">
-            <button
-              className="menu-button"
-              onClick={() => navigate('../biblioteca')}
-            >
-              Entrar <Badge text="H" />
-            </button>
-          </div>
+          <MenuButton onClick={() => navigate('../biblioteca')}>
+            Entrar
+          </MenuButton>
         </Card>
+      </Cards>
+
+      <Footer>
+        <img src="/src/assets/ramal.png" alt="ramal" />
 
         <TranscriptContainer transcript={transcript} />
-      </Container>
 
-      <HelpButton list={optionList} />
-      {caregiver ? <ChatButton /> : null}
-    </>
+        {caregiver ? <ChatButton /> : <span />}
+      </Footer>
+    </Container>
   );
 };

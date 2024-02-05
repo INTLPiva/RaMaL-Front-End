@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { Container } from './styles';
+import { Buttons, Container, EnterButton, ReturnButton, Title } from './styles';
 import { Card } from '../../components/Card';
 import { Input } from '../../components/Input';
 import { useAuth } from '../../contexts/AuthContext';
@@ -37,36 +37,28 @@ export const Login = () => {
   }
 
   return (
-    <>
-      <Container>
-        <Card>
-          <>
-            <h1 className="title">Login</h1>
+    <Container>
+      <Card>
+        <Title>Login</Title>
 
-            <div className="inputs">
-              <Input
-                name="Email"
-                type="text"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Input
-                name="Senha"
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+        <div>
+          <Input
+            name="Email"
+            type="text"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            name="Senha"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
 
-            <div className="buttons">
-              <button className="entrar-button" onClick={handleLogin}>
-                Entrar
-              </button>
-              <button className="voltar-button" onClick={() => navigate('/')}>
-                Voltar
-              </button>
-            </div>
-          </>
-        </Card>
-      </Container>
-    </>
+        <Buttons>
+          <EnterButton onClick={handleLogin}>Entrar</EnterButton>
+          <ReturnButton onClick={() => navigate('/')}>Voltar</ReturnButton>
+        </Buttons>
+      </Card>
+    </Container>
   );
 };

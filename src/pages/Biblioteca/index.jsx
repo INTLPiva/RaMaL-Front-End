@@ -10,7 +10,17 @@ import SpeechRecognition, {
 } from 'react-speech-recognition';
 import { toast } from 'react-toastify';
 
-import { Container } from './styles';
+import {
+  Container,
+  Disabled,
+  Footer,
+  Header,
+  ListCard,
+  ListHeader,
+  ListItems,
+  MicrophoneContainer,
+  TextContainer,
+} from './styles';
 import { BackButton } from '../../components/BackButton';
 import { ChatButton } from '../../components/ChatButton';
 import { ChooseFileModal } from '../../components/ChooseFileModal';
@@ -23,17 +33,8 @@ import {
   handleClickCloseModal,
   handleClickBackButton,
   handleClickChatButton,
-  // handleClickFirstChatOption,
-  handleClickSecondChatOption,
+  handleClickFirstChatOption,
 } from '../../utils/handleClick';
-import {
-  hasLetterA,
-  hasLetterB,
-  hasLetterC,
-  hasLetterF,
-  // hasLetterE,
-  hasLetterO,
-} from '../../utils/hasLetter';
 import {
   hasNumber1,
   hasNumber2,
@@ -52,8 +53,8 @@ export const Biblioteca = ({ setPdf }) => {
   const [caregiver, setCaregiver] = useState({});
 
   const optionList = [
-    'B - Para voltar para o Menu',
-    'C - Para abrir o chat',
+    'Voltar - Para voltar para o Menu',
+    'Chat - Para abrir o chat',
     'N.º - Para escolher um livro',
   ];
 
@@ -62,9 +63,9 @@ export const Biblioteca = ({ setPdf }) => {
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return (
-      <div className="microphone-container">
+      <MicrophoneContainer>
         Browser is not Support Speech Recognition.
-      </div>
+      </MicrophoneContainer>
     );
   }
 
@@ -113,26 +114,21 @@ export const Biblioteca = ({ setPdf }) => {
   }
 
   useEffect(() => {
-    if (hasLetterA(transcript)) {
+    if (transcript.toLowerCase().includes('ajuda')) {
       resetTranscript();
       handleClickHelpButton();
-    } else if (hasLetterB(transcript)) {
+    } else if (transcript.toLowerCase().includes('voltar')) {
       resetTranscript();
       handleClickBackButton();
-    } else if (hasLetterC(transcript)) {
+    } else if (transcript.toLowerCase().includes('chat')) {
       resetTranscript();
       handleClickChatButton();
-    } else if (hasLetterF(transcript)) {
+    } else if (transcript.toLowerCase().includes('fechar')) {
       resetTranscript();
       handleClickCloseModal();
-    }
-    // else if (hasLetterE(transcript)) {
-    //   resetTranscript();
-    //   handleClickFirstChatOption();
-    // }
-    else if (hasLetterO(transcript)) {
+    } else if (transcript.toLowerCase().includes('chamar')) {
       resetTranscript();
-      handleClickSecondChatOption();
+      handleClickFirstChatOption();
     } else if (hasNumber1(transcript)) {
       resetTranscript();
       handleGetPDF(books[0]?.id);
@@ -187,11 +183,14 @@ export const Biblioteca = ({ setPdf }) => {
 
   return (
     <>
-      <BackButton page={'../menu'} />
-
       <Container>
-        <div className="listCard">
-          <div className="listHeader">
+        <Header>
+          <BackButton page={'../menu'} />
+          <HelpButton list={optionList} />
+        </Header>
+
+        <ListCard>
+          <ListHeader>
             <p>Livros (max: 6)</p>
 
             {books.length < 6 ? (
@@ -202,47 +201,45 @@ export const Biblioteca = ({ setPdf }) => {
                 />
               </a>
             ) : (
-              <div className="disableFileContainer">
-                <a className="disableFileModal">
-                  <PlusCircle size={40} />
-                </a>
-              </div>
+              <Disabled>
+                <PlusCircle size={40} />
+              </Disabled>
             )}
-          </div>
+          </ListHeader>
 
           {books.length ? (
             books.map((item, index) => (
-              <>
-                <div className="listItems">
-                  <span>
-                    <span className="bookIndex">{index + 1}</span> {item.name}
-                  </span>
-                  <div>
-                    <a>
-                      <Trash
-                        size={32}
-                        onClick={() => handleDeletePDF(item.id)}
-                      />
-                    </a>
-                    <a onClick={() => handleGetPDF(item.id)}>
-                      <ArrowRight size={32} />
-                    </a>
-                  </div>
+              <ListItems key={index}>
+                <span>
+                  {index + 1} - {item.name}
+                </span>
+
+                <div>
+                  <a>
+                    <Trash size={32} onClick={() => handleDeletePDF(item.id)} />
+                  </a>
+
+                  <a onClick={() => handleGetPDF(item.id)}>
+                    <ArrowRight size={32} />
+                  </a>
                 </div>
-              </>
+              </ListItems>
             ))
           ) : (
-            <div className="textContainer">
+            <TextContainer>
               <h1>Não existem livros cadastrados</h1>
-            </div>
+            </TextContainer>
           )}
-        </div>
+        </ListCard>
 
-        <TranscriptContainer transcript={transcript} />
+        <Footer>
+          <img src="/src/assets/ramal.png" alt="ramal" />
+
+          <TranscriptContainer transcript={transcript} />
+
+          {caregiver ? <ChatButton /> : <span />}
+        </Footer>
       </Container>
-
-      <HelpButton list={optionList} />
-      {caregiver ? <ChatButton /> : null}
 
       {isOpenChooseFileModal && (
         <ChooseFileModal setIsOpen={setIsOpenChooseFileModal} />

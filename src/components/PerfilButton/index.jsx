@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { Container } from './styles';
+import { Button, PerfilOptions } from './styles';
 import { useAuth } from '../../contexts/AuthContext';
 
 export const PerfilButton = () => {
@@ -21,19 +21,17 @@ export const PerfilButton = () => {
   };
 
   return (
-    <Container>
-      <button id="perfilButton" className="button" onClick={handleClick}>
+    <>
+      <Button id="perfilButton" className="button" onClick={handleClick}>
         Perfil
-      </button>
+      </Button>
 
       {isOpenPerfil && (
-        <div className="perfilOptions">
-          <ul>
-            <li onClick={() => navigate('../cuidador')}>Cuidador</li>
-            <li onClick={signOut}>Sair</li>
-          </ul>
-        </div>
+        <PerfilOptions>
+          <li onClick={() => navigate('../cuidador')}>Cuidador</li>
+          <li onClick={signOut}>Sair</li>
+        </PerfilOptions>
       )}
-    </Container>
+    </>
   );
 };

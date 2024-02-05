@@ -33,8 +33,6 @@ export const Container = styled.div`
     transform: translateX(10px) translateY(-7px);
     font-size: 1em;
     padding: 0 20px;
-    /* background: #fff; */
-    /* color: black; */
     background-color: black;
     color: #fff;
     border-radius: 2px;
