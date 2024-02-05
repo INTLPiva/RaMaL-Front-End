@@ -30,7 +30,7 @@ Aplicação Web desenvolvido em React para leitura de livros em pdf usando coman
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/RAMAL-TCC/Front-End.git && cd Front-End
+git clone https://github.com/INTLPiva/RaMaL-Front-End.git && cd RaMaL-Front-End
 ```
 
 2. Instale todas as depencências
