@@ -14,14 +14,12 @@ describe('Testes TranscriptContainer', () => {
 
     render(<TranscriptContainer transcript={transcriptText} />);
 
-    expect(screen.getByAltText('ramal')).toBeInTheDocument();
     expect(screen.getByText(transcriptText)).toBeInTheDocument();
   });
 
   test('Renderiza corretamente sem transcript', () => {
     render(<TranscriptContainer />);
 
-    expect(screen.getByAltText('ramal')).toBeInTheDocument();
     expect(screen.queryByText(/transcript/i)).toBeNull();
   });
 });

@@ -46,7 +46,9 @@ describe('Testes ChatModal', () => {
 
   test('Chama a API para enviar mensagem corretamente', async () => {
     render(<ChatModal setIsOpen={mockSetIsOpen} />);
-    const sendMessageButton = screen.getByText('O - Preciso que venha aqui');
+    const sendMessageButton = screen.getByText(
+      'Chamar - Para chamar seu cuidador'
+    );
     fireEvent.click(sendMessageButton);
 
     await waitFor(() => {
@@ -62,7 +64,9 @@ describe('Testes ChatModal', () => {
     axios.post.mockRejectedValueOnce(new Error('API Error'));
 
     render(<ChatModal setIsOpen={mockSetIsOpen} />);
-    const sendMessageButton = screen.getByText('O - Preciso que venha aqui');
+    const sendMessageButton = screen.getByText(
+      'Chamar - Para chamar seu cuidador'
+    );
     fireEvent.click(sendMessageButton);
 
     await waitFor(() => {
